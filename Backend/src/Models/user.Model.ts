@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     max: 10,
-    min:3,
+    min: 3,
     unique: true,
   },
   password: {
@@ -21,6 +21,12 @@ const userSchema = new mongoose.Schema({
     max: 36,
     unique: true,
   },
+  contents: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Content",
+    },
+  ],
 });
 
 const userModel = mongoose.model("User", userSchema);
