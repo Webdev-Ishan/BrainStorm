@@ -123,7 +123,10 @@ export const SigninController = async (req: Request, res: Response) => {
       sameSite: "none",
     });
 
-    return res.status(200).send(exist);
+    return res.status(200).json({
+      success: true,
+      message: "Logged in SuccessFull",
+    });
   } catch (error) {
     if (error instanceof Error) {
       return res.status(500).json({
@@ -134,6 +137,45 @@ export const SigninController = async (req: Request, res: Response) => {
     }
   }
 
+  return res.status(500).json({
+    success: false,
+    message: "Internal Server Error",
+  });
+};
+
+export const profileController = async (req: Request, res: Response) => {
+    const userId = req.user?.id;
+  
+  if (!userId) {
+    return res.status(403).json({
+      success: false,
+      message: "Login first please",
+      value:req.body.userid
+    });
+  }
+
+  try {
+    let user = await userModel.findById(userId);
+    if (!user) {
+      return res.status(403).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      user,
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      return res.status(500).json({
+        success: false,
+        message: "Something went wrong",
+        error: error,
+      });
+    }
+  }
   return res.status(500).json({
     success: false,
     message: "Internal Server Error",
