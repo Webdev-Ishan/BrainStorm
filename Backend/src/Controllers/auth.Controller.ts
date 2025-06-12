@@ -144,13 +144,13 @@ export const SigninController = async (req: Request, res: Response) => {
 };
 
 export const profileController = async (req: Request, res: Response) => {
-    const userId = req.user?.id;
-  
+  const userId = req.user?.id;
+
   if (!userId) {
     return res.status(403).json({
       success: false,
       message: "Login first please",
-      value:req.body.userid
+      value: req.body.userid,
     });
   }
 
@@ -166,6 +166,33 @@ export const profileController = async (req: Request, res: Response) => {
     return res.status(200).json({
       success: true,
       user,
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      return res.status(500).json({
+        success: false,
+        message: "Something went wrong",
+        error: error,
+      });
+    }
+  }
+  return res.status(500).json({
+    success: false,
+    message: "Internal Server Error",
+  });
+};
+
+export const logoutController = async (req: Request, res: Response) => {
+  try {
+    res.cookie("token", "", {
+      httpOnly: true,
+      sameSite: "none",
+      secure: true,
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "Log out",
     });
   } catch (error) {
     if (error instanceof Error) {
