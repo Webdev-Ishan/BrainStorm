@@ -52,14 +52,14 @@ export const addContent = async (req: Request, res: Response) => {
       },
     }));
 
-     await tagModel.bulkWrite(newTags);
+    await tagModel.bulkWrite(newTags);
 
     const tagDocs = await tagModel.find({
-  title: { $in: uniqueTags }
-});
+      title: { $in: uniqueTags },
+    });
 
-// Extract ObjectIds
-const tagIDs = tagDocs.map(tag => tag._id.toString());
+    // Extract ObjectIds
+    const tagIDs = tagDocs.map((tag) => tag._id);
 
     const content = new contentModel({
       link,
@@ -95,5 +95,98 @@ const tagIDs = tagDocs.map(tag => tag._id.toString());
   return res.status(500).json({
     success: false,
     message: "Something went wrong",
+  });
+};
+
+export const getContent = async (req: Request, res: Response) => {
+  const id = req.user?.id;
+  if (!id) {
+    return res.status(403).json({
+      success: false,
+      message: "Id of the user not found",
+    });
+  }
+  try {
+    let user = await userModel.findById(id);
+    if (!user) {
+      return res.status(403).json({
+        success: false,
+        message: "User not exist",
+      });
+    }
+
+    let content = await contentModel.find({ userID: id });
+
+    if (!content) {
+      return res.status(403).json({
+        success: false,
+        message: "Unable to fetch the content.",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      content,
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      return res.status(500).json({
+        success: false,
+        message: "Something went wrong",
+        error,
+      });
+    }
+  }
+
+  return res.status(500).json({
+    success: false,
+    message: "Something wen wrong",
+  });
+};
+
+export const getSpecificContent = async (req: Request, res: Response) => {
+  const id = req.user?.id;
+  const contentid = req.params.id;
+  if (!id || !contentid) {
+    return res.status(403).json({
+      success: false,
+      message: "Id not found",
+    });
+  }
+  try {
+    let user = await userModel.findById(id);
+    if (!user) {
+      return res.status(403).json({
+        success: false,
+        message: "User not exist",
+      });
+    }
+
+    let content = await contentModel.findById(contentid);
+
+    if (!content) {
+      return res.status(403).json({
+        success: false,
+        message: "Unable to fetch the content.",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      content,
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      return res.status(500).json({
+        success: false,
+        message: "Something went wrong",
+        error,
+      });
+    }
+  }
+
+  return res.status(500).json({
+    success: false,
+    message: "Something wen wrong",
   });
 };
