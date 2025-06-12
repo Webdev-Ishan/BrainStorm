@@ -190,3 +190,65 @@ export const getSpecificContent = async (req: Request, res: Response) => {
     message: "Something wen wrong",
   });
 };
+
+export const deleteContent = async (req: Request, res: Response) => {
+  const id = req.user?.id;
+  const contentid = req.params.id;
+  if (!id || !contentid) {
+    return res.status(403).json({
+      success: false,
+      message: "Id not found",
+    });
+  }
+
+  try {
+    let user = await userModel.findById(id);
+    if (!user) {
+      return res.status(403).json({
+        success: false,
+        message: "User not exist",
+      });
+    }
+
+    let content = await contentModel.findById(contentid);
+
+    if (!content) {
+      return res.status(403).json({
+        success: false,
+        message: "content do not exist .",
+      });
+    }
+
+    if (content.userID?.toString() != id) {
+      return res.status(403).json({
+        success: false,
+        message: "You are not allowed to modify this content.",
+      });
+    }
+
+    await contentModel.findByIdAndDelete(content._id);
+
+    await userModel.findByIdAndUpdate(
+      user._id,
+      { $pull: { contents: content._id } },
+      { new: true }
+    );
+
+    return res.status(200).json({
+      success: true,
+      message: "Content Deleted Successfully.",
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      return res.status(500).json({
+        success: false,
+        message: "Something went wrong",
+        error,
+      });
+    }
+  }
+  return res.status(500).json({
+    success: false,
+    message: "Something wen wrong",
+  });
+};
