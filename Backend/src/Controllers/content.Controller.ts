@@ -192,7 +192,9 @@ export const getSpecificContent = async (req: Request, res: Response) => {
       });
     }
 
-    let content = await contentModel.findById(contentid);
+    let content = await contentModel
+      .findById(contentid)
+      .populate("userID", "username");
 
     if (!content) {
       return res.status(403).json({
@@ -370,6 +372,46 @@ export const UpdateController = async (req: Request, res: Response) => {
     return res.status(200).json({
       success: true,
       message: "Content of this is updated successfully",
+      content,
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      return res.status(500).json({
+        success: false,
+        message: "Something went wrong",
+        error: error,
+      });
+    }
+  }
+  return res.status(500).json({
+    success: false,
+    message: "Internal Server Error",
+  });
+};
+
+export const getContentviaLink = async (req: Request, res: Response) => {
+  const link = req.params.link;
+  if (!link) {
+    return res.status(403).json({
+      success: false,
+      message: "Link is not found",
+    });
+  }
+
+  try {
+    let content = await contentModel
+      .findOne({ sharable: link })
+      .populate("userID", "username" );
+
+    if (!content) {
+      return res.status(403).json({
+        success: false,
+        message: "Content is not found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
       content,
     });
   } catch (error) {

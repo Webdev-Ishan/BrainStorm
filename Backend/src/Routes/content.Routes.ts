@@ -10,6 +10,10 @@ contentRouter.get(
   authUser,
   contentController.getSpecificContent
 );
+contentRouter.get(
+  "/content/:link",
+  contentController.getContentviaLink
+);
 contentRouter.delete("/content/:id", authUser, contentController.deleteContent);
 contentRouter.put("/updateInfo/:id",authUser,contentController.UpdateController);
 export default contentRouter;
