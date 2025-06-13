@@ -208,3 +208,71 @@ export const logoutController = async (req: Request, res: Response) => {
     message: "Internal Server Error",
   });
 };
+
+export const updateController = async (req: Request, res: Response) => {
+  const userid = req.user?.id;
+  if (!userid) {
+    return res.status(403).json({
+      succes: false,
+      message: "User id is not found",
+    });
+  }
+
+  const parsedbody = userprofileSchema.safeParse(req.body);
+  if (!parsedbody.success) {
+    return res.status(411).json({
+      success: false,
+      message: "Input fields are incorrect",
+      errors: parsedbody.error.flatten(),
+    });
+  }
+  const { username, password, email } = parsedbody.data;
+
+  try {
+    let exist = await userModel.findById(userid);
+    if (!exist) {
+      return res.status(403).json({
+        success: false,
+        message: "User do not exist",
+      });
+    }
+
+    let verifyPassword = await bcrypt.compare(password, exist.password);
+
+    if (exist.username != username) {
+      exist.username = username;
+    }
+
+    if (exist.email != email) {
+      exist.email = email;
+    }
+
+    if (!verifyPassword) {
+      let salt = await bcrypt.genSalt(10);
+      let hashed = await bcrypt.hash(password, salt);
+      exist.password = hashed;
+    }
+
+    await exist.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Profile Updated",
+      exist,
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      return res.status(500).json({
+        success: false,
+        message: "Something went wrong",
+        error: error,
+      });
+    }
+  }
+  return res.status(500).json({
+    success: false,
+    message: "Internal Server Error",
+  });
+};
+
+

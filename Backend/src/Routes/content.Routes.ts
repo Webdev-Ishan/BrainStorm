@@ -11,5 +11,5 @@ contentRouter.get(
   contentController.getSpecificContent
 );
 contentRouter.delete("/content/:id", authUser, contentController.deleteContent);
-contentRouter.get("/search",authUser,contentController.search)
+contentRouter.put("/updateInfo/:id",authUser,contentController.UpdateController);
 export default contentRouter;

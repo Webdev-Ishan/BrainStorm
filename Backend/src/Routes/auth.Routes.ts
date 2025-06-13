@@ -7,4 +7,5 @@ authRouter.post("/signup", authController.SignupController);
 authRouter.post("/signin", authController.SigninController);
 authRouter.get("/profile",authUser,authController.profileController);
 authRouter.post("/logout",authUser,authController.logoutController)
+authRouter.put("/updateInfo",authUser,authController.updateController);
 export default authRouter;

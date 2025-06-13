@@ -5,6 +5,7 @@ dotenv.config();
 import { connectToDb } from "./Config/DB";
 import authRoutes from "./Routes/auth.Routes";
 import contentRoutes from "./Routes/content.Routes";
+import tagRoutes from "./Routes/tag.Routes";
 import cookieParser from "cookie-parser";
 
 const port = process.env.PORT || 3000;
@@ -15,6 +16,7 @@ app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/user", contentRoutes);
+app.use("/api/tags",tagRoutes);
 
 (async function () {
   try {

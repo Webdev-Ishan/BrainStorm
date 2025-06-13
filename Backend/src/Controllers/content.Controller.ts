@@ -3,7 +3,6 @@ import { Request, Response } from "express";
 import { string, z } from "zod";
 import userModel from "../Models/user.Model";
 import tagModel from "../Models/tag.Model";
-import mongoose from "mongoose";
 
 const contentSchema = z.object({
   link: z.string(),
@@ -250,5 +249,107 @@ export const deleteContent = async (req: Request, res: Response) => {
   return res.status(500).json({
     success: false,
     message: "Something wen wrong",
+  });
+};
+
+export const UpdateController = async (req: Request, res: Response) => {
+  const userid = req.user?.id;
+  const contentid = req.params.id;
+
+  if (!userid || !contentid) {
+    return res.status(403).json({
+      success: false,
+      message: "ids not found",
+    });
+  }
+
+  const parsedbody = contentSchema.safeParse(req.body);
+
+  if (!parsedbody.success) {
+    return res.status(411).json({
+      success: false,
+      message: "Input fields are incorrect",
+      errors: parsedbody.error.flatten(),
+    });
+  }
+  const { link, type, title, tags } = parsedbody.data;
+
+  try {
+    let exist = await userModel.findById(userid);
+    if (!exist) {
+      return res.status(403).json({
+        success: false,
+        message: "User  not found",
+      });
+    }
+
+    let content = await contentModel.findById(contentid);
+    if (!content) {
+      return res.status(403).json({
+        success: false,
+        message: "Content not found",
+      });
+    }
+
+    if (content.userID?.toString() != userid) {
+      return res.status(403).json({
+        success: false,
+        message: "You can not update this content",
+      });
+    }
+
+    if (content.link != link) {
+      content.link = link;
+    }
+
+    if (content.type != type) {
+      content.type = type;
+    }
+
+    if (content.title != title) {
+      content.title = title;
+    }
+
+    let uniqueTags = [...new Set(tags)];
+
+    let newtags = uniqueTags.map((tag) => ({
+      updateOne: {
+        filter: { title: tag },
+        update: { $setOnInsert: { title: tag } },
+        upsert: true,
+      },
+    }));
+
+    await tagModel.bulkWrite(newtags);
+
+    const tagDocs = await tagModel.find({
+      title: { $in: uniqueTags },
+    });
+
+    // Extract ObjectIds
+    const tagIDs = tagDocs.map((tag) => tag._id);
+
+    if (content.tagID != tagIDs) {
+      content.tagID = tagIDs;
+    }
+    await content.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Content of this is updated successfully",
+      content,
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      return res.status(500).json({
+        success: false,
+        message: "Something went wrong",
+        error: error,
+      });
+    }
+  }
+  return res.status(500).json({
+    success: false,
+    message: "Internal Server Error",
   });
 };
