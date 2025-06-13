@@ -3,6 +3,7 @@ import { z } from "zod";
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import transporter from "../Config/nodemailer.config";
 
 const userprofileSchema = z.object({
   username: z.string().min(3).max(10),
@@ -62,6 +63,15 @@ export const SignupController = async (req: Request, res: Response) => {
       sameSite: "none",
       secure: true,
     });
+
+    const mailoptions = {
+      from: process.env.SENDER_EMAIL,
+      to: user.email,
+      subject: "Account is registered",
+      text: `Welcome to the BrainStorm , Your second Brain to complete and remember the tasks which you care.`,
+    };
+
+    await transporter.sendMail(mailoptions);
 
     return res.status(200).json({
       success: true,
@@ -274,5 +284,3 @@ export const updateController = async (req: Request, res: Response) => {
     message: "Internal Server Error",
   });
 };
-
-

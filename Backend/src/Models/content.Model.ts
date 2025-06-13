@@ -5,6 +5,7 @@ const contentSchema = new mongoose.Schema({
   link: {
     type: String,
     required: true,
+    unique:true
   },
   type: {
     type: String,
@@ -14,6 +15,10 @@ const contentSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
+  },
+  sharable: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Link",
   },
   tagID: [
     {

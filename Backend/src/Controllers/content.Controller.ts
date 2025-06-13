@@ -1,8 +1,11 @@
 import contentModel from "../Models/content.Model";
 import { Request, Response } from "express";
-import { string, z } from "zod";
+import { z } from "zod";
 import userModel from "../Models/user.Model";
 import tagModel from "../Models/tag.Model";
+import LinkModel from "../Models/Link.Model";
+import generateShortLink from "../Utils/hashGenerator";
+import transporter from "../Config/nodemailer.config";
 
 const contentSchema = z.object({
   link: z.string(),
@@ -60,11 +63,30 @@ export const addContent = async (req: Request, res: Response) => {
     // Extract ObjectIds
     const tagIDs = tagDocs.map((tag) => tag._id);
 
+    let existContent = await contentModel.findOne({ link: link });
+    if (existContent) {
+      return res.status(400).json({
+        success: false,
+        message: "This content alraedy exist in your brain",
+        existContent,
+      });
+    }
+
+    let convertedURL = generateShortLink(link);
+
+    let share = new LinkModel({
+      link: convertedURL,
+      userID: user._id,
+    });
+
+    await share.save();
+
     const content = new contentModel({
       link,
       title,
       tagID: tagIDs,
       type,
+      sharable: share._id,
       userID: userid,
     });
 
@@ -75,6 +97,15 @@ export const addContent = async (req: Request, res: Response) => {
       { $push: { contents: content._id } },
       { new: true }
     );
+
+    const mailoptions = {
+      from: process.env.SENDER_EMAIL,
+      to: user.email,
+      subject: "Task is added to BrainStorm",
+      text: `This is the Sharable Link wich you can give to anyone to access your brain, This called Neuron ${content.sharable} .`,
+    };
+
+    await transporter.sendMail(mailoptions);
 
     return res.status(200).json({
       success: true,
@@ -232,6 +263,8 @@ export const deleteContent = async (req: Request, res: Response) => {
       { $pull: { contents: content._id } },
       { new: true }
     );
+
+    await LinkModel.findByIdAndDelete(content.sharable);
 
     return res.status(200).json({
       success: true,
