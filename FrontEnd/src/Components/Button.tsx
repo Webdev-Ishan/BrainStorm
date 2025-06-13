@@ -9,13 +9,13 @@ export interface ButtonProps {
 }
 
 const variantStyles: Record<ButtonProps["variant"], string> = {
-  Primary: "bg-purple-600 text-white hover:bg-purple-800",
+  Primary: "bg-purple-600 text-white hover:bg-purple-700",
   Secondary: "bg-blue-100 text-blue-700 hover:bg-blue-200 border border-blue-200",
   Danger: "bg-red-500 text-white hover:bg-red-600",
 };
 
 const sizeStyles: Record<ButtonProps["size"], string> = {
-  sm: "px-3 py-1 text-sm",
+  sm: "px-3 py-2 text-sm",
   md: "px-4 py-2 text-base",
   lg: "px-5 py-3 text-lg",
 };
