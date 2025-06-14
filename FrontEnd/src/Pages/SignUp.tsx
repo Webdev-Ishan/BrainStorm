@@ -52,6 +52,9 @@ export const SignUp = () => {
       if (error instanceof Error) {
         console.log(error.message);
         toast.error(error.message);
+        setemail("");
+        setpassword("");
+        setusername("");
       }
     }
   };

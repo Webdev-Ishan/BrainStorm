@@ -6,6 +6,7 @@ import { connectToDb } from "./Config/DB";
 import authRoutes from "./Routes/auth.Routes";
 import contentRoutes from "./Routes/content.Routes";
 import tagRoutes from "./Routes/tag.Routes";
+import contactRouter from "./Routes/contact.Routes";
 import cookieParser from "cookie-parser";
 import cors from 'cors'
 
@@ -25,6 +26,7 @@ app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 app.use("/api/user", contentRoutes);
 app.use("/api/tags",tagRoutes);
+app.use("/api/contact",contactRouter);
 
 (async function () {
   try {

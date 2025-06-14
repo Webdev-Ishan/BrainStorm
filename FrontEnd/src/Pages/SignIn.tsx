@@ -1,5 +1,59 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import axios from "axios";
 export const SignIn = () => {
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+
+  const navigate = useNavigate();
+
+  const url = import.meta.env.VITE_API_URL;
+
+  type BackendResponse = {
+    success: boolean;
+    message: string;
+  };
+
+  const submithandler = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formdata = new FormData();
+
+    formdata.append("email", email);
+    formdata.append("password", password);
+
+    try {
+      console.log(url);
+      const response = await axios.post<BackendResponse>(
+        `${url}/api/auth/signin`,
+        formdata,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.data && response.data.success) {
+        toast.success("Login successfull");
+        navigate("/");
+        setemail("");
+        setpassword("");
+      } else {
+        toast.error(" Oops Try Again");
+        setemail("");
+        setpassword("");
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+        toast.error(error.message);
+        setemail("");
+        setpassword("");
+      }
+    }
+  };
+
   return (
     <div>
       <div className="text-center mt-24 mb-16  ">
@@ -18,7 +72,9 @@ export const SignIn = () => {
             />
           </svg>
         </div>
-        <h2 className="text-4xl tracking-tight font-bold">SIGN IN INTO YOUR ACCOUNT</h2>
+        <h2 className="text-4xl tracking-tight font-bold">
+          SIGN IN INTO YOUR ACCOUNT
+        </h2>
         <span className="text-sm">
           or{" "}
           <Link to={"/SignUp"} className="text-blue-500">
@@ -27,7 +83,10 @@ export const SignIn = () => {
         </span>
       </div>
       <div className="flex justify-center my-2 mx-4 md:mx-0 mb-24 ">
-        <form className="w-full max-w-xl bg-blue-200 border rounded-lg shadow-md p-6 duration-300 hover:shadow-md hover:shadow-purple-500">
+        <form
+          onSubmit={submithandler}
+          className="w-full max-w-xl bg-blue-200 border rounded-lg shadow-md p-6 duration-300 hover:shadow-md hover:shadow-purple-500"
+        >
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full md:w-full px-3 mb-6">
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
@@ -36,6 +95,8 @@ export const SignIn = () => {
               <input
                 className="appearance-none block w-full bg-white text-gray-900 font-medium border border-gray-400 rounded-lg py-3 px-3 leading-tight focus:outline-none"
                 type="email"
+                value={email}
+                onChange={(e) => setemail(e.target.value)}
                 required
               />
             </div>
@@ -46,19 +107,12 @@ export const SignIn = () => {
               <input
                 className="appearance-none block w-full bg-white text-gray-900 font-medium border border-gray-400 rounded-lg py-3 px-3 leading-tight focus:outline-none"
                 type="password"
+                value={password}
+                onChange={(e) => setpassword(e.target.value)}
                 required
               />
             </div>
             <div className="w-full flex items-center justify-between px-3 mb-3 ">
-              <label className="flex items-center w-1/2">
-                <input
-                  type="checkbox"
-                  name=""
-                  id=""
-                  className="mr-1 bg-white shadow"
-                />
-                <span className="text-sm text-gray-700 pt-1">Remember Me</span>
-              </label>
               <div className="w-1/2 text-right">
                 <a href="#" className="text-blue-500 text-sm tracking-tight">
                   Forget your password?
@@ -70,7 +124,6 @@ export const SignIn = () => {
                 SIGN IN
               </button>
             </div>
-            
           </div>
         </form>
       </div>
