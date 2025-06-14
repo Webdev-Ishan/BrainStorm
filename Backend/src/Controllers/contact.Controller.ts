@@ -2,6 +2,7 @@ import { z } from "zod";
 import { Request, Response } from "express";
 import transporter from "../Config/nodemailer.config";
 import contactModel from "../Models/Contact.Model";
+import userModel from "../Models/user.Model";
 
 const contactSchema = z.object({
   Fullname: z.string().min(3).max(24),
@@ -25,11 +26,13 @@ export const Contact = async (req: Request, res: Response) => {
   try {
     const exist = await contactModel.findOne({ email: email });
     if (exist) {
-      return res.status(500).json({
+      return res.status(403).json({
         success: false,
         message: "You have already submitted a request",
       });
     }
+
+    const user = await userModel.findOne({ email: email });
 
     let contactinfo = new contactModel({
       Fullname,
@@ -47,6 +50,19 @@ export const Contact = async (req: Request, res: Response) => {
     };
 
     await transporter.sendMail(mailoptions);
+
+    if (user) {
+      await userModel.findByIdAndUpdate(
+        user._id,
+        { $push: { contactRequest: contactinfo._id } },
+        { new: true }
+      );
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Response Submitted",
+    });
   } catch (error) {
     if (error instanceof Error) {
       return res.status(500).json({

@@ -21,6 +21,12 @@ const userSchema = new mongoose.Schema({
     max: 36,
     unique: true,
   },
+  contactRequest: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Contact",
+    },
+  ],
   contents: [
     {
       type: mongoose.Schema.Types.ObjectId,
