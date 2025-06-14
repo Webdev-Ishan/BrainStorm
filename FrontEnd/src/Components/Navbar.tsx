@@ -26,7 +26,7 @@ export const Navbar = () => {
               />
             </svg>
 
-            <span className="self-center text-2xl font-bold whitespace-nowrap text-blue-600">
+            <span className="self-center text-2xl font-bold whitespace-nowrap text-blue-600" >
               BrainStorm
             </span>
           </a>
