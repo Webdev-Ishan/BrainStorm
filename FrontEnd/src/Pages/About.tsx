@@ -1,13 +1,13 @@
 const About = () => {
   return (
-   <div className="py-20 mt-12 bg-gradient-to-br from-purple-700 via-purple-600 to-blue-500 text-white">
+   <div className="py-20 mt-12  from-purple-600 via-purple-50bg-gradient-to-br0 to-blue-500 text-white">
   <div className="container mx-auto px-6 md:px-12 xl:px-20 ">
     <div className="space-y-10 md:space-y-0 md:flex md:gap-10 lg:items-center lg:w-full lg:justify-between">
       <div className="md:w-7/12 lg:w-6/12">
         <h2 className="text-3xl md:text-5xl font-extrabold leading-tight">
           Capture Everything.<br />
           <span className="text-blue-200">Organize with Purpose.</span><br />
-          <span className="text-purple-300">Remember Forever.</span>
+          <span className="text-white">Remember Forever.</span>
         </h2>
         <p className="mt-8 text-lg leading-relaxed text-white">
           In a world overflowing with information, our minds are constantly bombarded with ideas, inspirations, tasks, and fleeting thoughts—many of which disappear before we can make something meaningful from them.

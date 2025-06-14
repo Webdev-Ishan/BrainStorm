@@ -1,6 +1,8 @@
 import { Button } from "./Button";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 export const Navbar = () => {
+  const navigate = useNavigate()
   return (
     <div>
       <nav className="bg-white  fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600 shadow-sm hover:shadow-purple-500 duration-300">
@@ -30,10 +32,13 @@ export const Navbar = () => {
           </a>
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <Button
-              onClick={() => {}}
+              onClick={() => {
+                 navigate("/SignIn")
+              }}
               variant="Primary"
               size="sm"
               text="Get Started"
+              link="/SignIn"
             />
             <button
               data-collapse-toggle="navbar-sticky"
@@ -91,7 +96,7 @@ export const Navbar = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/Contact"
                   className="block py-2 text-lg px-3 bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent  rounded-sm md:bg-transparent hover:text-blue-700 md:p-0"
                 >
                   Contact

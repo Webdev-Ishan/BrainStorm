@@ -6,6 +6,7 @@ export interface ButtonProps {
   size: "sm" | "md" | "lg";
   text: string;
   startIcon?: ReactNode;
+  link?:string
 }
 
 const variantStyles: Record<ButtonProps["variant"], string> = {

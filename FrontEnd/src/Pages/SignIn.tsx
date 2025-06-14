@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-export const SignUp = () => {
+export const SignIn = () => {
   return (
     <div>
       <div className="text-center mt-24 mb-16  ">
@@ -18,30 +18,17 @@ export const SignUp = () => {
             />
           </svg>
         </div>
-        <h2 className="text-4xl tracking-tight font-bold">
-          CREATE YOUR ACCOUNT
-        </h2>
+        <h2 className="text-4xl tracking-tight font-bold">SIGN IN INTO YOUR ACCOUNT</h2>
         <span className="text-sm">
           or{" "}
           <Link to={"/SignUp"} className="text-blue-500">
-            login into your account
+            register a new account
           </Link>
         </span>
       </div>
       <div className="flex justify-center my-2 mx-4 md:mx-0 mb-24 ">
-        <form className="w-full max-w-xl bg-blue-200 border  rounded-lg shadow-md p-6 duration-300 hover:shadow-md hover:shadow-purple-500">
+        <form className="w-full max-w-xl bg-blue-200 border rounded-lg shadow-md p-6 duration-300 hover:shadow-md hover:shadow-purple-500">
           <div className="flex flex-wrap -mx-3 mb-6">
-            <div className="w-full md:w-full px-3 mb-6">
-              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                UserName
-              </label>
-              <input
-                className="appearance-none block w-full bg-white text-gray-900 font-medium border border-gray-400 rounded-lg py-3 px-3 leading-tight focus:outline-none"
-                type="text"
-                required
-              />
-            </div>
-
             <div className="w-full md:w-full px-3 mb-6">
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                 Email address
@@ -83,6 +70,7 @@ export const SignUp = () => {
                 SIGN IN
               </button>
             </div>
+            
           </div>
         </form>
       </div>
