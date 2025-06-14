@@ -19,12 +19,12 @@ export const Footer = () => {
                 </Link>
               </li>
               <li className="mb-2">
-                <a
-                  href="#"
+                <Link
+                  to="https://www.linkedin.com/in/ishan-saini-49b6842a6/"
                   className="font-sans antialiased text-base text-current py-1 hover:text-purple-500 duration-300"
                 >
                   Careers
-                </a>
+                </Link>
               </li>
               <li className="mb-2">
                 <a
@@ -35,12 +35,12 @@ export const Footer = () => {
                 </a>
               </li>
               <li className="mb-2">
-                <a
-                  href="#"
+                <Link
+                  to="https://zeenews.india.com/"
                   className="font-sans antialiased text-base text-current py-1 hover:text-purple-500 duration-300"
                 >
                   News
-                </a>
+                </Link>
               </li>
             </ul>
 
@@ -87,12 +87,12 @@ export const Footer = () => {
                 Resources
               </p>
               <li className="mb-2">
-                <a
-                  href="#"
+                <Link
+                  to="https://www.buildingasecondbrain.com/"
                   className="font-sans antialiased text-base text-current py-1 mt-4 hover:text-purple-500 duration-300"
                 >
                   Blog
-                </a>
+                </Link>
               </li>
               <li className="mb-2">
                 <a
@@ -103,12 +103,12 @@ export const Footer = () => {
                 </a>
               </li>
               <li className="mb-2">
-                <a
-                  href="#"
+                <Link
+                  to="https://www.ssp.sh/brain/"
                   className="font-sans antialiased text-base text-current py-1 mt-4 hover:text-purple-500 duration-300"
                 >
                   Free Products
-                </a>
+                </Link>
               </li>
               <li>
                 <a

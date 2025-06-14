@@ -6,8 +6,11 @@ import { Contact } from "./Components/Contact";
 import { SignIn } from "./Pages/SignIn";
 import { SignUp } from "./Pages/SignUp";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 const App = () => {
   return (
+  <>
+    <ToastContainer/>
     <BrowserRouter>
       <div className=" w-full h-full ">
         <Navbar />
@@ -21,6 +24,7 @@ const App = () => {
         <Footer/>
       </div>
     </BrowserRouter>
+    </>
   );
 };
 
