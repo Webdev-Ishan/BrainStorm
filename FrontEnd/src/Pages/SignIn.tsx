@@ -15,6 +15,22 @@ export const SignIn = () => {
     message: string;
   };
 
+  const validateEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length > 36) {
+      setemail(e.target.value.slice(0, 35));
+    } else {
+      setemail(e.target.value);
+    }
+  };
+
+  const validatePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length > 20) {
+      setpassword(e.target.value.slice(0, 19));
+    } else {
+      setpassword(e.target.value);
+    }
+  };
+
   const submithandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formdata = new FormData();
@@ -96,7 +112,7 @@ export const SignIn = () => {
                 className="appearance-none block w-full bg-white text-gray-900 font-medium border border-gray-400 rounded-lg py-3 px-3 leading-tight focus:outline-none"
                 type="email"
                 value={email}
-                onChange={(e) => setemail(e.target.value)}
+                onChange={validateEmail}
                 required
               />
             </div>
@@ -108,7 +124,7 @@ export const SignIn = () => {
                 className="appearance-none block w-full bg-white text-gray-900 font-medium border border-gray-400 rounded-lg py-3 px-3 leading-tight focus:outline-none"
                 type="password"
                 value={password}
-                onChange={(e) => setpassword(e.target.value)}
+                onChange={validatePassword}
                 required
               />
             </div>
