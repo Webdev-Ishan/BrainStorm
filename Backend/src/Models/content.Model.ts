@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const contentTypes = ["image", "video", "article", "audio"];
+const contentTypes = ["tweet", "linkedin", "facebook", "Instagram","Youtube"];
 
 const contentSchema = new mongoose.Schema({
   link: {

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Button } from "../Components/Button";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
@@ -98,21 +97,20 @@ const Profile = () => {
           Your Working email is - <b className="text-black">{Email}</b>
         </span>
 
-        <Button
-          onClick={() => {}}
-          variant="Secondary"
-          size="sm"
-          text="Add Links"
-          link="/SignIn"
-        />
+        <Link
+          to={`/Content`}
+          className="bg-blue-300 hover:bg-blue-500 hover:text-white duration-300 text-black font-semibold px-3 py-2 rounded-xl shadow-md border mb-12 border-black"
+        >
+          ADD CONTENT
+        </Link>
       </main>
 
       {/* ✅ Mapping all items of arr */}
-      <section className="w-full bg-white min-h-[50vh]">
+      <section className="w-full bg-blue-100 min-h-[50vh]">
         <div className="w-full h-full mt-16 mb-16 flex justify-center items-center flex-wrap gap-8">
           {arr.length > 0 ? (
             arr.map((item, index) => (
-              <Card key={index} link={item.link} title={item.title} />
+              <Card key={index} link={item.link} title={item.title} type={item.type}/>
             ))
           ) : (
             <p className="text-black">No content added yet.</p>

@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Profile from "./Pages/Profile";
 import { Update } from "./Pages/Update";
+import { Content } from "./Pages/Content";
 const App = () => {
   return (
   <>
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="/SignUp" element={<SignUp />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/Update" element={<Update />} />
+          <Route path="/Content" element={<Content/>} />
         </Routes>
         <Footer/>
       </div>
