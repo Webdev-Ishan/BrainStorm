@@ -7,6 +7,9 @@ export const SignUp = () => {
   const [username, setusername] = useState("");
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
+  const [userToggle, setuserToggle] = useState(true);
+  const [emailToggle, setemailToggle] = useState(true);
+  const [passwordToggle, setpasswordToggle] = useState(true);
 
   const navigate = useNavigate();
 
@@ -18,8 +21,9 @@ export const SignUp = () => {
   };
 
   const validateUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length > 10) {
-      setusername(e.target.value.slice(0, 9));
+    if (e.target.value.length > 10 || e.target.value.length <= 3) {
+      setusername(e.target.value.slice(0, 10));
+      setuserToggle(!userToggle);
     } else {
       setusername(e.target.value);
     }
@@ -27,15 +31,17 @@ export const SignUp = () => {
 
   const validateEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length > 36) {
-      setemail(e.target.value.slice(0, 35));
+      setemail(e.target.value.slice(0, 36));
+      setemailToggle(!emailToggle);
     } else {
       setemail(e.target.value);
     }
   };
 
   const validatePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length > 20 || e.target.value.length < 8) {
-      setpassword(e.target.value.slice(0, 19));
+    if (e.target.value.length > 20 || e.target.value.length <= 8) {
+      setpassword(e.target.value.slice(0, 20));
+      setpasswordToggle(!passwordToggle);
     } else {
       setpassword(e.target.value);
     }
@@ -106,7 +112,7 @@ export const SignUp = () => {
         </h2>
         <span className="text-sm">
           or{" "}
-          <Link to={"/SignUp"} className="text-blue-500">
+          <Link to={"/SignIn"} className="text-blue-500">
             login into your account
           </Link>
         </span>
@@ -128,6 +134,13 @@ export const SignUp = () => {
                 onChange={validateUsername}
                 required
               />
+              {userToggle ? (
+                ""
+              ) : (
+                <p className="text-red-600">
+                  Username should be more then 2 and less then 11
+                </p>
+              )}
             </div>
 
             <div className="w-full md:w-full px-3 mb-6">
@@ -141,6 +154,13 @@ export const SignUp = () => {
                 onChange={validateEmail}
                 required
               />
+              {emailToggle ? (
+                ""
+              ) : (
+                <p className="text-red-600">
+                  Email should be less then 36 letter
+                </p>
+              )}
             </div>
             <div className="w-full md:w-full px-3 mb-6">
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
@@ -153,6 +173,13 @@ export const SignUp = () => {
                 onChange={validatePassword}
                 required
               />
+              {passwordToggle ? (
+                ""
+              ) : (
+                <p className="text-red-600">
+                  Password should be more then 7 and less then 21
+                </p>
+              )}
             </div>
             <div className="w-full flex items-center justify-between px-3 mb-3 ">
               <div className="w-1/2 text-right">

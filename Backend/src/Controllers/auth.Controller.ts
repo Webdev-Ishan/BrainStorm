@@ -8,7 +8,7 @@ import transporter from "../Config/nodemailer.config";
 const userprofileSchema = z.object({
   username: z.string().min(3).max(10),
   password: z.string().min(8).max(20),
-  email: z.string(),
+  email: z.string().email().max(36),
 });
 
 const userloginSchema = z.object({
