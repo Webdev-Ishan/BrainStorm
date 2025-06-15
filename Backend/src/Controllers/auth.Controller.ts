@@ -165,7 +165,7 @@ export const profileController = async (req: Request, res: Response) => {
   }
 
   try {
-    let user = await userModel.findById(userId);
+    let user = await userModel.findById(userId).populate("contents", "link title type" )
     if (!user) {
       return res.status(403).json({
         success: false,

@@ -55,7 +55,7 @@ export const SignUp = () => {
     formdata.append("password", password);
 
     try {
-      console.log(url);
+      
       const response = await axios.post<BackendResponse>(
         `${url}/api/auth/signup`,
         formdata,
@@ -63,12 +63,13 @@ export const SignUp = () => {
           headers: {
             "Content-Type": "application/json",
           },
+          withCredentials:true
         }
       );
 
       if (response.data && response.data.success) {
         toast.success("Validation successfull");
-        navigate("/");
+        navigate("/Profile");
         setemail("");
         setpassword("");
         setusername("");
@@ -182,11 +183,7 @@ export const SignUp = () => {
               )}
             </div>
             <div className="w-full flex items-center justify-between px-3 mb-3 ">
-              <div className="w-1/2 text-right">
-                <a href="#" className="text-blue-500 text-sm tracking-tight">
-                  Forget your password?
-                </a>
-              </div>
+              
             </div>
             <div className="w-full md:w-full px-3 mb-6">
               <button className="appearance-none block w-full from-purple-600 via-purple-500 bg-gradient-to-br 0 to-blue-500 text-white  hover:border-blue-600 duration-300 font-bold border border-gray-200 rounded-lg py-3 px-3 leading-tight hover:bg-blue-500 focus:outline-none focus:bg-white focus:border-gray-500">

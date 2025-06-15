@@ -87,12 +87,12 @@ export const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/Profile"
                   className="block py-2 text-lg px-3 bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent  rounded-sm md:bg-transparent hover:text-blue-700 md:p-0"
                 >
                   Profile
-                </a>
+                </Link>
               </li>
               <li>
                 <a

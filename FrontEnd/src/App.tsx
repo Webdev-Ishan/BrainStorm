@@ -7,6 +7,8 @@ import { SignIn } from "./Pages/SignIn";
 import { SignUp } from "./Pages/SignUp";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import Profile from "./Pages/Profile";
+import { Update } from "./Pages/Update";
 const App = () => {
   return (
   <>
@@ -20,6 +22,8 @@ const App = () => {
           <Route path="/Contact" element={<Contact />} />
           <Route path="/SignIn" element={<SignIn />} />
           <Route path="/SignUp" element={<SignUp />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/Update" element={<Update />} />
         </Routes>
         <Footer/>
       </div>

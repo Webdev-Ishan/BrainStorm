@@ -11,7 +11,7 @@ export interface ButtonProps {
 
 const variantStyles: Record<ButtonProps["variant"], string> = {
   Primary: "bg-purple-600 text-white hover:bg-purple-700",
-  Secondary: "bg-blue-100 text-blue-700 hover:bg-blue-200 border border-blue-200",
+  Secondary: "bg-blue-100 text-blue-700 hover:bg-blue-200 border border-black",
   Danger: "bg-red-500 text-white hover:bg-red-600",
 };
 

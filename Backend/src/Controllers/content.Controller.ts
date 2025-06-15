@@ -66,7 +66,7 @@ export const addContent = async (req: Request, res: Response) => {
     let existContent = await contentModel.findOne({ link: link });
     if (existContent) {
       return res.status(400).json({
-        success: false,
+        success: true,
         message: "This content alraedy exist in your brain",
         existContent,
       });
