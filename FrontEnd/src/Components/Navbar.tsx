@@ -3,26 +3,22 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/Components/ui/button";
 import { useState } from "react";
 
-
-
 export const Navbar = () => {
   const navigate = useNavigate();
- const [neuron,setneuron]=useState("")
+  const [neuron, setneuron] = useState("");
 
-
-
- const fetchBrain = async(e: React.FormEvent)=>{
-e.preventDefault()
-navigate(`/content/${neuron}`)
-setneuron("");
- }
+  const fetchBrain = async (e: React.FormEvent) => {
+    e.preventDefault();
+    navigate(`/content/${neuron}`);
+    setneuron("");
+  };
 
   return (
     <div>
       <nav className="bg-white  fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600 shadow-sm hover:shadow-purple-500 duration-300">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <a
-            href="https://flowbite.com/"
+          <Link
+            to="/"
             className="flex items-center space-x-3 rtl:space-x-reverse"
           >
             <svg
@@ -43,7 +39,7 @@ setneuron("");
             <span className="self-center text-2xl font-bold whitespace-nowrap text-blue-600">
               BrainStorm
             </span>
-          </a>
+          </Link>
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <div className="flex min-h-auto flex-col items-center justify-center">
               <Button
@@ -51,6 +47,7 @@ setneuron("");
                   navigate("/SignIn");
                 }}
                 className="bg-purple-500 text-white border border-black"
+                size={"sm"}
               >
                 Get Started
               </Button>
@@ -88,7 +85,7 @@ setneuron("");
               <li>
                 <Link
                   to="/"
-                  className="block py-2 text-lg px-3 bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent rounded-sm md:bg-transparent hover:text-blue-700 md:p-0"
+                  className="block py-2 text-md px-3 bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent rounded-sm md:bg-transparent hover:text-blue-700 md:p-0"
                 >
                   Home
                 </Link>
@@ -96,7 +93,7 @@ setneuron("");
               <li>
                 <Link
                   to="/About"
-                  className="block py-2 text-lg px-3 bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent rounded-sm md:bg-transparent hover:text-blue-700 md:p-0"
+                  className="block py-2 text-md px-3 bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent rounded-sm md:bg-transparent hover:text-blue-700 md:p-0"
                 >
                   About
                 </Link>
@@ -104,7 +101,7 @@ setneuron("");
               <li>
                 <Link
                   to="/Profile"
-                  className="block py-2 text-lg px-3 bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent  rounded-sm md:bg-transparent hover:text-blue-700 md:p-0"
+                  className="block py-2 text-md px-3 bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent  rounded-sm md:bg-transparent hover:text-blue-700 md:p-0"
                 >
                   Profile
                 </Link>
@@ -112,22 +109,20 @@ setneuron("");
               <li>
                 <a
                   href="/Contact"
-                  className="block py-2 text-lg px-3 bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent  rounded-sm md:bg-transparent hover:text-blue-700 md:p-0"
+                  className="block py-2 text-md px-3 bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent  rounded-sm md:bg-transparent hover:text-blue-700 md:p-0"
                 >
                   Contact
                 </a>
               </li>
             </ul>
-          <form onSubmit={fetchBrain}>
-            <input
-              
-              type="text"
-              value={neuron}
-              onChange={(e)=>setneuron(e.target.value)}
-            
-              className="w-full max-w-xl ml-10 px-5 py-1 rounded-xl border border-purple-500 bg-white text-gray-800 placeholder-gray-400 shadow-md focus:outline-none focus:ring-2 focus:ring-purple-400 transition duration-300"
-              placeholder="🔍 Enter Neuron..."
-            />
+            <form onSubmit={fetchBrain}>
+              <input
+                type="text"
+                value={neuron}
+                onChange={(e) => setneuron(e.target.value)}
+                className="w-full max-w-2xl ml-5 px-5  rounded-xl border border-purple-500 bg-white text-gray-800 placeholder-gray-400 shadow-md focus:outline-none focus:ring-2 focus:ring-purple-400 transition duration-300"
+                placeholder="🔍 Enter Neuron..."
+              />
             </form>
           </div>
         </div>
