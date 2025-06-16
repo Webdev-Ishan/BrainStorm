@@ -6,7 +6,7 @@ import { YouTubeEmbed } from 'react-social-media-embed';
 
 interface CardProps {
   type?: string;
-  title: string;
+  title?: string;
   link: string; // This should be the tweet or post URL
 }
 

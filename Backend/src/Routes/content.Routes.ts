@@ -11,7 +11,7 @@ contentRouter.get(
   contentController.getSpecificContent
 );
 contentRouter.get(
-  "/content/:link",
+  "/Braincontent/:neuron",
   contentController.getContentviaLink
 );
 contentRouter.delete("/content/:id", authUser, contentController.deleteContent);

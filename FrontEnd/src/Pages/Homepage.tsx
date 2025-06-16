@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
-
+import { Button } from "@/Components/ui/button";
+import { useNavigate } from "react-router-dom";
 export const HomePage = () => {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-600 via-purple-500 to-blue-500 text-white flex flex-col">
       {/* Hero Section */}
@@ -19,12 +20,16 @@ export const HomePage = () => {
           BrainStorm is your second brain — a digital space to capture, link,
           and retrieve your best ideas with ease.
         </p>
-        <Link
-          to="/About"
-          className="bg-blue-600 text-white font-semibold border border-black px-6 py-2 rounded-xl shadow-md"
-        >
-          Know Us
-        </Link>
+        <div className="flex min-h-auto flex-col items-center justify-center">
+              <Button
+                onClick={() => {
+                  navigate("/About");
+                }}
+                className="bg-purple-500 text-white border border-black"
+              >
+                KNOW US
+              </Button>
+            </div>
       </main>
 
       {/* Section 1: Features */}
@@ -36,13 +41,13 @@ export const HomePage = () => {
           clarity.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-          <div className="bg-purple-100 p-6 rounded-xl shadow-md border hover:border-blue-600 hover:scale-105 duration-200  hover:shadow-purple-500">
+          <div className="bg-purple-100  border-black p-6 rounded-xl shadow-md border hover:border-blue-600 hover:scale-105 duration-200  hover:shadow-purple-500">
             <h4 className="text-xl font-semibold mb-4 text-blue-700">
               SMART NOTES
             </h4>
             <p>Capture thoughts instantly and link them contextually.</p>
           </div>
-          <div className="bg-purple-100 p-6 rounded-xl shadow-md border hover:border-blue-600 hover:scale-105 duration-200 hover:shadow-purple-500">
+          <div className="bg-purple-100 border-black p-6 rounded-xl shadow-md border hover:border-blue-600 hover:scale-105 duration-200 hover:shadow-purple-500">
             <h4 className="text-xl font-semibold mb-4 text-blue-700">
               VISUAL ORGANISATION
             </h4>
@@ -50,7 +55,7 @@ export const HomePage = () => {
               Use tags, topics, and collections to group your ideas naturally.
             </p>
           </div>
-          <div className="bg-purple-100 p-6 rounded-xl shadow-md border hover:border-blue-600 hover:scale-105 duration-200 hover:shadow-purple-500">
+          <div className="bg-purple-100 p-6 border-black rounded-xl shadow-md border hover:border-blue-600 hover:scale-105 duration-200 hover:shadow-purple-500">
             <h4 className="text-xl font-semibold mb-4 text-blue-700">
               QUICK SEARCH
             </h4>
@@ -69,19 +74,19 @@ export const HomePage = () => {
           thinking style and workflow.
         </p>
         <div className="flex flex-col md:flex-row justify-center gap-10">
-          <div className="border border-white rounded-xl bg-white text-black p-6 w-72 shadow-md  hover:border-blue-600 hover:scale-105 duration-200  hover:shadow-blue-600">
+          <div className="border border-black rounded-xl bg-white text-black p-6 w-72 shadow-md  hover:border-blue-600 hover:scale-105 duration-200  hover:shadow-blue-600">
             <h4 className="text-xl font-semibold mb-4 text-blue-600">
               Students
             </h4>
             <p>Organize class notes and research effortlessly.</p>
           </div>
-          <div className="border border-white rounded-xl bg-white text-black p-6 w-72 shadow-md  hover:border-blue-600 hover:scale-105 duration-200  hover:shadow-blue-600">
+          <div className="border border-black rounded-xl bg-white text-black p-6 w-72 shadow-md  hover:border-blue-600 hover:scale-105 duration-200  hover:shadow-blue-600">
             <h4 className="text-xl font-semibold mb-4 text-blue-600">
               Developers
             </h4>
             <p>Store code snippets, project links, and tech stacks.</p>
           </div>
-          <div className="border border-white rounded-xl bg-white text-black p-6 w-72 shadow-md  hover:border-blue-600 hover:scale-105 duration-200  hover:shadow-blue-600">
+          <div className="border border-black rounded-xl bg-white text-black p-6 w-72 shadow-md  hover:border-blue-600 hover:scale-105 duration-200  hover:shadow-blue-600">
             <h4 className="text-xl font-semibold mb-4 text-blue-600">
               Writers
             </h4>
@@ -99,12 +104,16 @@ export const HomePage = () => {
           Sign up for BrainStorm and never lose track of your thoughts again.
           It's free, fast, and built with love for creative minds.
         </p>
-        <Link
-          to="/SignIn"
-          className="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-8 py-3 rounded-2xl shadow-md border mb-24 border-black"
-        >
-          Get Started
-        </Link>
+        <div className="flex min-h-auto flex-col items-center justify-center">
+          <Button
+            onClick={() => {
+              navigate("/SignIn");
+            }}
+            className="bg-purple-500 text-white border border-black"
+          >
+            Get Started
+          </Button>
+        </div>
       </section>
     </div>
   );

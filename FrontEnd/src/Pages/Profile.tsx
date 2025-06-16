@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { Card } from "../Components/Card";
+import { Button } from "@/Components/ui/button";
 
 // ✅ Move outside the component for better reusability
 type ContentItem = {
@@ -29,7 +30,7 @@ const Profile = () => {
   const [arr, setarr] = useState<ContentItem[]>([]);
 
   const url = import.meta.env.VITE_API_URL;
-
+ const navigate = useNavigate();
   const fetchdata = async () => {
     try {
       const response = await axios.get<BackendResponse>(
@@ -66,12 +67,16 @@ const Profile = () => {
     <div className="min-h-screen bg-gradient-to-br from-purple-600 via-purple-500 to-blue-500 text-white flex flex-col relative">
       {/* Top Right Update Profile Button */}
       <div className="absolute top-20 right-4">
-        <Link
-          to={`/Update`}
-          className="bg-blue-300 hover:bg-blue-500 hover:text-white duration-300 text-black font-semibold px-3 py-2 rounded-xl shadow-md border mb-24 border-black"
-        >
-          Update Profile
-        </Link>
+       <div className="flex min-h-auto ab flex-col items-center justify-center">
+              <Button
+                onClick={() => {
+                  navigate("/Update");
+                }}
+                className="bg-blue-400 text-white border border-black"
+              >
+                Update Profile
+              </Button>
+            </div>
       </div>
 
       <main className="flex flex-col items-center justify-center flex-grow px-6 text-center py-16">
@@ -97,12 +102,16 @@ const Profile = () => {
           Your Working email is - <b className="text-black">{Email}</b>
         </span>
 
-        <Link
-          to={`/Content`}
-          className="bg-blue-300 hover:bg-blue-500 hover:text-white duration-300 text-black font-semibold px-3 py-2 rounded-xl shadow-md border mb-12 border-black"
-        >
-          ADD CONTENT
-        </Link>
+       <div className="flex min-h-auto ab flex-col items-center justify-center">
+              <Button
+                onClick={() => {
+                  navigate("/Content");
+                }}
+                className="bg-blue-400 text-white border border-black"
+              >
+                Add Link
+              </Button>
+            </div>
       </main>
 
       {/* ✅ Mapping all items of arr */}

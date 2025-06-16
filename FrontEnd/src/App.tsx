@@ -10,6 +10,7 @@ import { ToastContainer } from "react-toastify";
 import Profile from "./Pages/Profile";
 import { Update } from "./Pages/Update";
 import { Content } from "./Pages/Content";
+import Brain from "./Pages/Brain";
 const App = () => {
   return (
   <>
@@ -26,6 +27,7 @@ const App = () => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/Update" element={<Update />} />
           <Route path="/Content" element={<Content/>} />
+          <Route path="/content/:id" element={<Brain/>} />
         </Routes>
         <Footer/>
       </div>

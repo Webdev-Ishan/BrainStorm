@@ -1,8 +1,22 @@
-import { Button } from "./Button";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { Button } from "@/Components/ui/button";
+import { useState } from "react";
+
+
+
 export const Navbar = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+ const [neuron,setneuron]=useState("")
+
+
+
+ const fetchBrain = async(e: React.FormEvent)=>{
+e.preventDefault()
+navigate(`/content/${neuron}`)
+setneuron("");
+ }
+
   return (
     <div>
       <nav className="bg-white  fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600 shadow-sm hover:shadow-purple-500 duration-300">
@@ -26,20 +40,21 @@ export const Navbar = () => {
               />
             </svg>
 
-            <span className="self-center text-2xl font-bold whitespace-nowrap text-blue-600" >
+            <span className="self-center text-2xl font-bold whitespace-nowrap text-blue-600">
               BrainStorm
             </span>
           </a>
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-            <Button
-              onClick={() => {
-                 navigate("/SignIn")
-              }}
-              variant="Primary"
-              size="sm"
-              text="Get Started"
-              link="/SignIn"
-            />
+            <div className="flex min-h-auto flex-col items-center justify-center">
+              <Button
+                onClick={() => {
+                  navigate("/SignIn");
+                }}
+                className="bg-purple-500 text-white border border-black"
+              >
+                Get Started
+              </Button>
+            </div>
             <button
               data-collapse-toggle="navbar-sticky"
               type="button"
@@ -103,12 +118,17 @@ export const Navbar = () => {
                 </a>
               </li>
             </ul>
-
+          <form onSubmit={fetchBrain}>
             <input
+              
               type="text"
+              value={neuron}
+              onChange={(e)=>setneuron(e.target.value)}
+            
               className="w-full max-w-xl ml-10 px-5 py-1 rounded-xl border border-purple-500 bg-white text-gray-800 placeholder-gray-400 shadow-md focus:outline-none focus:ring-2 focus:ring-purple-400 transition duration-300"
               placeholder="🔍 Enter Neuron..."
             />
+            </form>
           </div>
         </div>
       </nav>

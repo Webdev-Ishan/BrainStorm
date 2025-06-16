@@ -390,8 +390,8 @@ export const UpdateController = async (req: Request, res: Response) => {
 };
 
 export const getContentviaLink = async (req: Request, res: Response) => {
-  const link = req.params.link;
-  if (!link) {
+  const neuron = req.params.neuron;
+  if (!neuron) {
     return res.status(403).json({
       success: false,
       message: "Link is not found",
@@ -400,7 +400,7 @@ export const getContentviaLink = async (req: Request, res: Response) => {
 
   try {
     let content = await contentModel
-      .findOne({ sharable: link })
+      .findOne({ sharable: neuron })
       .populate("userID", "username" );
 
     if (!content) {
