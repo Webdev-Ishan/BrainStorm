@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { Button } from "@/Components/ui/button";
 
 export const Contact = () => {
   const [Fullname, setFullname] = useState("");
@@ -65,12 +66,21 @@ export const Contact = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-purple-600 via-purple-500 to-blue-500">
-      <div className="flex items-center mt-12 justify-center p-12 ">
+    <div className="bg-gradient-to-br pt-4 from-purple-600 via-purple-500 to-blue-500">
+       <h2
+          className="text-3xl mt-16 text-center md:text-4xl font-extrabold text-white  mb-2 drop-shadow-lg tracking-wide"
+          style={{
+            WebkitTextStrokeWidth: "1px",
+            WebkitTextStrokeColor: "#000",
+          }}
+        >
+          CONTACT US
+        </h2>
+      <div className="flex items-center  justify-center p-12 ">
         <div className="mx-auto w-full max-w-[550px]">
-          <form onSubmit={submithandler}>
-            <div className="mb-5">
-              <label className="mb-3 block text-base font-medium text-white">
+          <form onSubmit={submithandler} className="border border-black rounded-lg p-2 px-2" >
+            <div className="mb-5 px-2 ">
+              <label className="mb-3 block text-sm font-medium text-white">
                 FULL NAME
               </label>
               <input
@@ -80,11 +90,11 @@ export const Contact = () => {
                 placeholder="Full Name"
                 value={Fullname}
                 onChange={(e) => setFullname(e.target.value)}
-                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                className="w-full rounded-md border border-[#e0e0e0] bg-white py-1 px-6 text-sm font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               />
             </div>
-            <div className="mb-5">
-              <label className="mb-3 block text-base font-medium text-white">
+            <div className="mb-5 px-2">
+              <label className="mb-3 block text-sm font-medium text-white">
                 EMAIL ADDRESS
               </label>
               <input
@@ -94,11 +104,11 @@ export const Contact = () => {
                 value={email}
                 onChange={(e) => setemail(e.target.value)}
                 placeholder="example@domain.com"
-                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                className="w-full rounded-md border border-[#e0e0e0] bg-white py-1 px-6 text-sm font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               />
             </div>
-            <div className="mb-5">
-              <label className="mb-3 block text-base font-medium text-white">
+            <div className="mb-5 px-2">
+              <label className="mb-3 block text-sm font-medium text-white">
                 SUBJECT
               </label>
               <input
@@ -108,11 +118,11 @@ export const Contact = () => {
                 value={Subject}
                 onChange={(e) => setSubject(e.target.value)}
                 placeholder="Enter your subject"
-                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                className="w-full rounded-md border border-[#e0e0e0] bg-white py-1 px-6 text-sm font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               />
             </div>
-            <div className="mb-5">
-              <label className="mb-3 block text-base font-medium text-white">
+            <div className="mb-5 px-2">
+              <label className="mb-3 block text-sm font-medium text-white">
                 Message
               </label>
               <textarea
@@ -121,13 +131,16 @@ export const Contact = () => {
                 placeholder="Type your message"
                 value={Message}
                 onChange={(e) => setMessage(e.target.value)}
-                className="w-full resize-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                className="w-full resize-none rounded-md border border-[#e0e0e0] bg-white py-1 px-6 text-sm font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               ></textarea>
             </div>
-            <div>
-              <button className="hover:shadow-form rounded-md bg-blue-600 hover:bg-blue-500 duration-300 border border-black py-3 px-8 text-base font-semibold text-white outline-none">
-                SUBMIT
-              </button>
+            <div className="flex min-h-auto ab flex-col items-center justify-center">
+              <Button
+                className="bg-blue-400 text-white border border-black"
+                size={"default"}
+              >
+                Submit
+              </Button>
             </div>
           </form>
         </div>

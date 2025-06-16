@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Card } from "../Components/Card";
 import { Button } from "@/Components/ui/button";
 
@@ -30,7 +30,7 @@ const Profile = () => {
   const [arr, setarr] = useState<ContentItem[]>([]);
 
   const url = import.meta.env.VITE_API_URL;
- const navigate = useNavigate();
+  const navigate = useNavigate();
   const fetchdata = async () => {
     try {
       const response = await axios.get<BackendResponse>(
@@ -67,59 +67,79 @@ const Profile = () => {
     <div className="min-h-screen bg-gradient-to-br from-purple-600 via-purple-500 to-blue-500 text-white flex flex-col relative">
       {/* Top Right Update Profile Button */}
       <div className="absolute top-20 right-4">
-       <div className="flex min-h-auto ab flex-col items-center justify-center">
-              <Button
-                onClick={() => {
-                  navigate("/Update");
-                }}
-                className="bg-blue-400 text-white border border-black"
-              >
-                Update Profile
-              </Button>
-            </div>
+        <div className="flex min-h-auto ab flex-col items-center justify-center">
+          <Button
+            onClick={() => {
+              navigate("/Update");
+            }}
+            className="bg-blue-400 text-white border border-black"
+            size={"sm"}
+          >
+            Update Profile
+          </Button>
+        </div>
       </div>
 
-      <main className="flex flex-col items-center justify-center flex-grow px-6 text-center py-16">
+      <main className="flex flex-col items-center justify-center flex-grow px-6 text-center py-20 bg-gradient-to-b from-purple-600 to-blue-500">
         <h2
-          className="text-4xl md:text-6xl font-bold text-white mt-4 drop-shadow-lg mb-24"
+          className="text-3xl md:text-5xl font-extrabold text-white mt-4 mb-10 drop-shadow-lg tracking-wide"
           style={{
             WebkitTextStrokeWidth: "1px",
-            WebkitTextStrokeColor: "black",
+            WebkitTextStrokeColor: "#000",
           }}
         >
-          WELCOME <span className="text-blue-600 uppercase">{username}</span>
+          Welcome,&nbsp;
+          <span className="text-blue-500 uppercase">{username}</span>
         </h2>
 
-        <p className="text-lg md:text-xl text-white/90 max-w-2xl mb-8">
-          <span className="font-bold text-black">
-            You are now in your second brain
+        <p className="text-base md:text-lg text-white/90 max-w-2xl mb-6 leading-relaxed">
+          <span className="font-semibold text-black underline underline-offset-4">
+            You are now in your second brain —
           </span>{" "}
-          — a digital space to capture, link, and retrieve your best ideas with
-          ease.
+          a creative digital space where your thoughts, links, and knowledge
+          come together seamlessly.
         </p>
 
-        <span className="mt-12 mb-16">
-          Your Working email is - <b className="text-black">{Email}</b>
-        </span>
+        <div className="bg-white text-purple-800 px-6 py-4 rounded-xl shadow-md mt-4 mb-10">
+          <p className="text-sm md:text-base font-medium">
+            Your working email:&nbsp;
+            <span className="text-blue-600 font-bold">{Email}</span>
+          </p>
+        </div>
 
-       <div className="flex min-h-auto ab flex-col items-center justify-center">
-              <Button
-                onClick={() => {
-                  navigate("/Content");
-                }}
-                className="bg-blue-400 text-white border border-black"
-              >
-                Add Link
-              </Button>
-            </div>
+        <div className="flex min-h-auto ab flex-col items-center justify-center">
+          <Button
+            onClick={() => {
+              navigate("/Content");
+            }}
+            className="bg-blue-400 text-white border border-black"
+            size={"default"}
+          >
+            Add Link +
+          </Button>
+        </div>
       </main>
 
       {/* ✅ Mapping all items of arr */}
-      <section className="w-full bg-blue-100 min-h-[50vh]">
-        <div className="w-full h-full mt-16 mb-16 flex justify-center items-center flex-wrap gap-8">
+      <section className="w-full bg-black min-h-[50vh]">
+        <h2
+          className="text-4xl mt-16 text-center md:text-4xl font-extrabold text-blue-500  mb-2  tracking-wide"
+          style={{
+            WebkitTextStrokeWidth: "1px",
+            WebkitTextStrokeColor: "white",
+          }}
+        >
+          YOUR SAVED LINKS ARE HERE
+        </h2>
+        <div className="w-full min-h-[60vh] py-16 px-4 flex justify-center items-center flex-wrap gap-6 md:gap-10 bg-black rounded-xl ">
           {arr.length > 0 ? (
             arr.map((item, index) => (
-              <Card key={index} link={item.link} title={item.title} type={item.type}/>
+              <Card
+                key={index}
+                link={item.link}
+                title={item.title}
+                type={item.type}
+              />
             ))
           ) : (
             <p className="text-black">No content added yet.</p>
