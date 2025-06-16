@@ -1,16 +1,13 @@
-
 import { useState } from "react";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 
 export const Content = () => {
-  const [username, setusername] = useState("");
-  const [email, setemail] = useState("");
-  const [password, setpassword] = useState("");
-  const [userToggle, setuserToggle] = useState(true);
-  const [emailToggle, setemailToggle] = useState(true);
-  const [passwordToggle, setpasswordToggle] = useState(true);
+  const [Title, setTitle] = useState("");
+  const [link, setlink] = useState("");
+  const [type, settype] = useState("");
+  const [tags, settags] = useState([]);
 
   const navigate = useNavigate();
 
@@ -21,42 +18,31 @@ export const Content = () => {
     message: string;
   };
 
-  const validateUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length > 10 || e.target.value.length <= 3) {
-      setusername(e.target.value.slice(0, 10));
-      setuserToggle(!userToggle);
-    } else {
-      setusername(e.target.value);
-    }
+  const validateTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
   };
 
-  const validateEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length > 36) {
-      setemail(e.target.value.slice(0, 36));
-      setemailToggle(!emailToggle);
-    } else {
-      setemail(e.target.value);
-    }
+  const validateLink = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setlink(e.target.value);
   };
 
-  const validatePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length > 20 || e.target.value.length <= 8) {
-      setpassword(e.target.value.slice(0, 20));
-      setpasswordToggle(!passwordToggle);
-    } else {
-      setpassword(e.target.value);
-    }
+  const validateTypes = (e: React.ChangeEvent<HTMLInputElement>) => {
+    settype(e.target.value);
+  };
+
+  const validateTags = (e: React.ChangeEvent<HTMLInputElement>) => {
+    settags(e.target.value);
   };
 
   const submithandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formdata = new FormData();
-    formdata.append("username", username);
-    formdata.append("email", email);
-    formdata.append("password", password);
+    formdata.append("title", Title);
+    formdata.append("link", link);
+    formdata.append("type", type);
+    formdata.append("tags", tags);
 
     try {
-      
       const response = await axios.post<BackendResponse>(
         `${url}/api/auth/signup`,
         formdata,
@@ -64,29 +50,29 @@ export const Content = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          withCredentials:true
+          withCredentials: true,
         }
       );
 
       if (response.data && response.data.success) {
         toast.success("Validation successfull");
         navigate("/Profile");
-        setemail("");
-        setpassword("");
-        setusername("");
+        settype("");
+        setlink("");
+        settype("");
       } else {
         toast.error(" Oops Try Again");
-        setemail("");
-        setpassword("");
-        setusername("");
+        settype("");
+        setlink("");
+        settype("");
       }
     } catch (error) {
       if (error instanceof Error) {
         console.log(error.message);
         toast.error(error.message);
-        setemail("");
-        setpassword("");
-        setusername("");
+        settype("");
+        setlink("");
+        settype("");
       }
     }
   };
@@ -109,10 +95,7 @@ export const Content = () => {
             />
           </svg>
         </div>
-        <h2 className="text-4xl tracking-tight font-bold">
-          Enter the Content
-        </h2>
-        
+        <h2 className="text-4xl tracking-tight font-bold">Enter the Content</h2>
       </div>
       <div className="flex justify-center my-2 mx-4 md:mx-0 mb-24 ">
         <form
@@ -127,17 +110,10 @@ export const Content = () => {
               <input
                 className="appearance-none block w-full bg-white text-gray-900 font-medium border border-gray-400 rounded-lg py-3 px-3 leading-tight focus:outline-none"
                 type="text"
-                value={username}
-                onChange={validateUsername}
+                value={Title}
+                onChange={validateTitle}
                 required
               />
-              {userToggle ? (
-                ""
-              ) : (
-                <p className="text-red-600">
-                  Username should be more then 2 and less then 11
-                </p>
-              )}
             </div>
 
             <div className="w-full md:w-full px-3 mb-6">
@@ -146,18 +122,11 @@ export const Content = () => {
               </label>
               <input
                 className="appearance-none block w-full bg-white text-gray-900 font-medium border border-gray-400 rounded-lg py-3 px-3 leading-tight focus:outline-none"
-                type="email"
-                value={email}
-                onChange={validateEmail}
+                type="text"
+                value={link}
+                onChange={validateLink}
                 required
               />
-              {emailToggle ? (
-                ""
-              ) : (
-                <p className="text-red-600">
-                  Email should be less then 36 letter
-                </p>
-              )}
             </div>
             <div className="w-full md:w-full px-3 mb-6">
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
@@ -165,25 +134,24 @@ export const Content = () => {
               </label>
               <input
                 className="appearance-none block w-full bg-white text-gray-900 font-medium border border-gray-400 rounded-lg py-3 px-3 leading-tight focus:outline-none"
-                type="password"
-                value={password}
-                onChange={validatePassword}
+                type="text"
+                value={type}
+                onChange={validateTypes}
                 required
               />
-              {passwordToggle ? (
-                ""
-              ) : (
-                <p className="text-red-600">
-                  Password should be more then 7 and less then 21
-                </p>
-              )}
             </div>
-            <div className="w-full flex items-center justify-between px-3 mb-3 ">
-              
+
+            <div className="w-full md:w-full px-3 mb-6">
+              <select value={tags}>
+                <option value="Orange">Orange</option>
+                <option value="Radish">Radish</option>
+                <option value="Cherry">Cherry</option>
+              </select>
             </div>
+            <div className="w-full flex items-center justify-between px-3 mb-3 "></div>
             <div className="w-full md:w-full px-3 mb-6">
               <button className="appearance-none block w-full from-purple-600 via-purple-500 bg-gradient-to-br 0 to-blue-500 text-white  hover:border-blue-600 duration-300 font-bold border border-gray-200 rounded-lg py-3 px-3 leading-tight hover:bg-blue-500 focus:outline-none focus:bg-white focus:border-gray-500">
-                Create 
+                Create
               </button>
             </div>
           </div>

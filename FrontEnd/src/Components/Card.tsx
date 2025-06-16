@@ -12,30 +12,30 @@ interface CardProps {
 
 export const Card = (props: CardProps) => {
   return (
-<div style={{ display: "flex", justifyContent: "center" }}>
+<div style={{ display: "flex", justifyContent: "center" } }>
   {props.type === "tweet" && (
-    <XEmbed url={props.link} width={350} height={350}/>
+    <XEmbed url={props.link} width={300} height={300}/>
   )}
 
   {props.type === "facebook" && (
-    <FacebookEmbed url={props.link} width={350} height={350}/>
+    <FacebookEmbed url={props.link} width={300} height={300}/>
   )}
 
   {props.type === "Instagram" && (
-    <InstagramEmbed url={props.link} width={350} height={350} />
+    <InstagramEmbed url={props.link} width={300} height={300} />
   )}
 
   {props.type === "linkedin" && (
     <LinkedInEmbed
-      url={"https://www.linkedin.com/embed/feed/update/urn:li:share:6898694772484112384"}
-      postUrl={props.link}
-      width={350}
-      height={500}
+      
+      url={props.link}
+      width={300}
+      height={300}
     />
   )}
 
   {props.type === "Youtube" && (
-    <YouTubeEmbed url={props.link} width={350} height={350}/>
+    <YouTubeEmbed url={props.link} width={300} height={300} />
   )}
 </div>
 
