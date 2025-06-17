@@ -131,11 +131,12 @@ export const HomePage = () => {
         <h3 className="text-3xl font-bold mb-8 text-white mt-8">
           WHAT OUR USER SAYS ABOUT US ?
         </h3>
-        <div className="relative w-full flex justify-center px-24 ">
+
+        <div className="relative w-full flex justify-center px-4 md:px-24">
           <Carousel className="w-full max-w-5xl">
             <CarouselContent>
               <CarouselItem className="basis-full flex justify-center">
-                <div className="w-96 h-58 border border-black rounded-xl bg-pink-100 text-black p-6 shadow-md hover:border-blue-600  duration-200 hover:shadow-blue-600">
+                <div className="w-96 h-58 border border-black rounded-xl bg-pink-100 text-black p-6 shadow-md hover:border-blue-600 duration-200 hover:shadow-blue-600">
                   <h4 className="text-xl font-semibold mb-4 text-blue-600">
                     Priya Sharma
                   </h4>
@@ -149,7 +150,7 @@ export const HomePage = () => {
               </CarouselItem>
 
               <CarouselItem className="basis-full flex justify-center">
-                <div className="w-96 h-58 border border-black rounded-xl bg-pink-100 text-black p-6 shadow-md hover:border-blue-600  duration-200 hover:shadow-blue-600">
+                <div className="w-96 h-58 border border-black rounded-xl bg-pink-100 text-black p-6 shadow-md hover:border-blue-600 duration-200 hover:shadow-blue-600">
                   <h4 className="text-xl font-semibold mb-4 text-blue-600">
                     Rahul Mehta
                   </h4>
@@ -162,7 +163,7 @@ export const HomePage = () => {
               </CarouselItem>
 
               <CarouselItem className="basis-full flex justify-center">
-                <div className="w-96 h-58 border border-black rounded-xl bg-pink-100 text-black p-6 shadow-md hover:border-blue-600  duration-200 hover:shadow-blue-600">
+                <div className="w-96 h-58 border border-black rounded-xl bg-pink-100 text-black p-6 shadow-md hover:border-blue-600 duration-200 hover:shadow-blue-600">
                   <h4 className="text-xl font-semibold mb-4 text-blue-600">
                     Aditi Verma
                   </h4>
@@ -178,17 +179,19 @@ export const HomePage = () => {
             <CarouselPrevious />
             <CarouselNext />
           </Carousel>
-           <div className="flex min-h-auto flex-col items-center justify-top">
+        </div>
+
+        {/* Responsive button container */}
+        <div className="mt-8 flex justify-center md:justify-end px-4 md:px-24">
           <Button
             onClick={() => {
               navigate("/Review");
             }}
-            className="bg-white text-blue-500  border border-black"
-            size={"sm"}
+            className="bg-white text-blue-500 border border-black "
+            size="default"
           >
             REVIEW US
           </Button>
-        </div>
         </div>
       </section>
     </div>

@@ -6,7 +6,6 @@ import userModel from "../Models/user.Model";
 const reviewSchema = z.object({
   name: z.string(),
   content: z.string(),
-  userID: z.string(),
 });
 
 export const makeReview = async (req: Request, res: Response) => {
@@ -66,6 +65,43 @@ export const makeReview = async (req: Request, res: Response) => {
     }
   }
 
+  return res.status(500).json({
+    success: false,
+    messsage: "Internal Server Error",
+  });
+};
+
+export const getreview = async (req: Request, res: Response) => {
+  const userid = req.user?.id;
+
+  if (!userid) {
+    return res.status(411).json({
+      success: false,
+      message: "Ids not found",
+    });
+  }
+
+  try {
+    const reviews = await reviewModel.find();
+
+    if (!reviews) {
+      return res.status(500).json({
+        success: false,
+        messsage: "Something went wrong",
+      });
+    }
+    return res.status(200).json({
+      success: true,
+      reviews,
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      return res.status(411).json({
+        success: false,
+        message: error.message,
+      });
+    }
+  }
   return res.status(500).json({
     success: false,
     messsage: "Internal Server Error",

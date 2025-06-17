@@ -11,6 +11,7 @@ import Profile from "./Pages/Profile";
 import { Update } from "./Pages/Update";
 import { Content } from "./Pages/Content";
 import Brain from "./Pages/Brain";
+import { Review } from "./Pages/Review";
 const App = () => {
   return (
   <>
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="/Update" element={<Update />} />
           <Route path="/Content" element={<Content/>} />
           <Route path="/content/:id" element={<Brain/>} />
+          <Route path="/review" element={<Review/>} />
         </Routes>
         <Footer/>
       </div>

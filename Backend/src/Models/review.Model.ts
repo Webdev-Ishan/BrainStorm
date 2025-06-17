@@ -14,5 +14,5 @@ const reviewSchema = new mongoose.Schema({
     ref: "User",
   },
 });
-const reviewModel = mongoose.model("Tag", reviewSchema);
+const reviewModel = mongoose.model("Review", reviewSchema);
 export default reviewModel;
