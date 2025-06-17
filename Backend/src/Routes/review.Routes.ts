@@ -4,5 +4,5 @@ import { authUser } from "../Middleware/auth.middleware";
 const reviewRouter = express.Router();
 
 reviewRouter.post("/", authUser, reviewController.makeReview);
-reviewRouter.get("/", reviewController.getreview);
+reviewRouter.get("/",authUser, reviewController.getreview);
 export default reviewRouter;

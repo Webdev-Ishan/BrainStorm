@@ -7,9 +7,53 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/Components/ui/carousel";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import axios from "axios";
+
+type ContentItem = {
+  name: string;
+  content: string;
+};
+
+type BackendResponse = {
+  success: boolean;
+  message: string;
+  reviews: ContentItem;
+};
 
 export const HomePage = () => {
   const navigate = useNavigate();
+  const [reviews, setreviews] = useState<ContentItem | null>();
+  const url = import.meta.env.VITE_API_URL;
+
+  const fetchReviews = async () => {
+    try {
+      const response = await axios.get<BackendResponse>(
+        `${url}/api/review/`,
+
+        {
+          withCredentials: true,
+        }
+      );
+
+      if (response.data && response.data.success) {
+        setreviews(response.data.reviews);
+      } else {
+        toast.error("Oops! Try Again");
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error);
+        toast.error(error.message);
+      }
+    }
+  };
+
+  useEffect(() => {
+    fetchReviews();
+  });
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-600 via-purple-500 to-blue-500 text-white flex flex-col">
       {/* Hero Section */}
@@ -135,45 +179,27 @@ export const HomePage = () => {
         <div className="relative w-full flex justify-center px-4 md:px-24">
           <Carousel className="w-full max-w-5xl">
             <CarouselContent>
-              <CarouselItem className="basis-full flex justify-center">
-                <div className="w-96 h-58 border border-black rounded-xl bg-pink-100 text-black p-6 shadow-md hover:border-blue-600 duration-200 hover:shadow-blue-600">
-                  <h4 className="text-xl font-semibold mb-4 text-blue-600">
-                    Priya Sharma
-                  </h4>
-                  <p>
-                    This platform has completely transformed the way I manage my
-                    class notes. The clean layout and simple tools helped me
-                    stay organized during exams. Highly recommended for students
-                    who want a digital edge!
-                  </p>
-                </div>
-              </CarouselItem>
-
-              <CarouselItem className="basis-full flex justify-center">
-                <div className="w-96 h-58 border border-black rounded-xl bg-pink-100 text-black p-6 shadow-md hover:border-blue-600 duration-200 hover:shadow-blue-600">
-                  <h4 className="text-xl font-semibold mb-4 text-blue-600">
-                    Rahul Mehta
-                  </h4>
-                  <p>
-                    I loved how intuitive and responsive the design is. It made
-                    working on group projects much smoother, especially with the
-                    ability to categorize resources. Great work by the dev team!
-                  </p>
-                </div>
-              </CarouselItem>
-
-              <CarouselItem className="basis-full flex justify-center">
-                <div className="w-96 h-58 border border-black rounded-xl bg-pink-100 text-black p-6 shadow-md hover:border-blue-600 duration-200 hover:shadow-blue-600">
-                  <h4 className="text-xl font-semibold mb-4 text-blue-600">
-                    Aditi Verma
-                  </h4>
-                  <p>
-                    From taking notes to organizing research for client work,
-                    this tool fits perfectly into my daily workflow. The
-                    interface is modern, and everything just works flawlessly.
-                  </p>
-                </div>
-              </CarouselItem>
+              {Array.isArray(reviews) && reviews.length > 0 ? (
+                reviews.map((review, index) => (
+                  <CarouselItem
+                    key={index}
+                    className="basis-full flex justify-center"
+                  >
+                    <div className="w-96 h-58 border border-black rounded-xl bg-pink-100 text-black p-6 shadow-md hover:border-blue-600 duration-200 hover:shadow-blue-600">
+                      <h4 className="text-xl font-semibold mb-4 text-blue-600">
+                        {review.name}
+                      </h4>
+                      <p>{review.content}</p>
+                    </div>
+                  </CarouselItem>
+                ))
+              ) : (
+                <CarouselItem className="basis-full flex justify-center">
+                  <div className="w-96 h-58 border border-black rounded-xl bg-pink-100 text-black p-6 shadow-md hover:border-blue-600 duration-200 hover:shadow-blue-600">
+                    Loading .....
+                  </div>
+                </CarouselItem>
+              )}
             </CarouselContent>
 
             <CarouselPrevious />
