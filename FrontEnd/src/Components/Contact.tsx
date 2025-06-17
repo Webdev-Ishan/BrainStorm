@@ -67,18 +67,21 @@ export const Contact = () => {
 
   return (
     <div className="bg-gradient-to-br pt-4 from-purple-600 via-purple-500 to-blue-500">
-       <h2
-          className="text-3xl mt-16 text-center md:text-4xl font-extrabold text-white  mb-2 drop-shadow-lg tracking-wide"
-          style={{
-            WebkitTextStrokeWidth: "1px",
-            WebkitTextStrokeColor: "#000",
-          }}
-        >
-          CONTACT US
-        </h2>
+      <h2
+        className="text-3xl mt-16 text-center md:text-4xl font-extrabold text-white  mb-2 drop-shadow-lg tracking-wide"
+        style={{
+          WebkitTextStrokeWidth: "1px",
+          WebkitTextStrokeColor: "#000",
+        }}
+      >
+        CONTACT US
+      </h2>
       <div className="flex items-center  justify-center p-12 ">
         <div className="mx-auto w-full max-w-[550px]">
-          <form onSubmit={submithandler} className="border border-black rounded-lg p-2 px-2" >
+          <form
+            onSubmit={submithandler}
+            className="border border-black  rounded-lg p-2 px-2"
+          >
             <div className="mb-5 px-2 ">
               <label className="mb-3 block text-sm font-medium text-white">
                 FULL NAME

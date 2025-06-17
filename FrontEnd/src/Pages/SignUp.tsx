@@ -2,16 +2,26 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
+import type { RootState } from "@/Redux/store";
+import { useSelector, useDispatch } from "react-redux";
+import { Login } from "../Redux/LoginSlice";
 
 export const SignUp = () => {
+  const navigate = useNavigate();
+  const loginStatus = useSelector(
+    (state: RootState) => state.LoginReducer.login
+  );
+  if (loginStatus == true) {
+    navigate("/Profile");
+  }
+  const dispatch = useDispatch();
+
   const [username, setusername] = useState("");
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [userToggle, setuserToggle] = useState(true);
   const [emailToggle, setemailToggle] = useState(true);
   const [passwordToggle, setpasswordToggle] = useState(true);
-
-  const navigate = useNavigate();
 
   const url = import.meta.env.VITE_API_URL;
 
@@ -55,7 +65,6 @@ export const SignUp = () => {
     formdata.append("password", password);
 
     try {
-      
       const response = await axios.post<BackendResponse>(
         `${url}/api/auth/signup`,
         formdata,
@@ -63,12 +72,13 @@ export const SignUp = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          withCredentials:true
+          withCredentials: true,
         }
       );
 
       if (response.data && response.data.success) {
         toast.success("Validation successfull");
+        dispatch(Login());
         navigate("/Profile");
         setemail("");
         setpassword("");
@@ -182,9 +192,7 @@ export const SignUp = () => {
                 </p>
               )}
             </div>
-            <div className="w-full flex items-center justify-between px-3 mb-3 ">
-              
-            </div>
+            <div className="w-full flex items-center justify-between px-3 mb-3 "></div>
             <div className="w-full md:w-full px-3 mb-6">
               <button className="appearance-none block w-full from-purple-600 via-purple-500 bg-gradient-to-br 0 to-blue-500 text-white  hover:border-blue-600 duration-300 font-bold border border-gray-200 rounded-lg py-3 px-3 leading-tight hover:bg-blue-500 focus:outline-none focus:bg-white focus:border-gray-500">
                 SIGN IN

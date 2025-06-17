@@ -1,10 +1,57 @@
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/Components/ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import type { RootState } from "@/Redux/store";
+import { useSelector, useDispatch } from "react-redux";
+import { Logout } from "../Redux/LoginSlice";
+import axios from "axios";
+
+type BackendResponse = {
+  success: boolean;
+  message: string;
+};
 
 export const Navbar = () => {
   const navigate = useNavigate();
+  const [buttonprop, setbuttonProp] = useState("Get Started");
+
+  const loginStatus = useSelector(
+    (state: RootState) => state.LoginReducer.login
+  );
+
+  const dispatch = useDispatch();
+  const url = import.meta.env.VITE_API_URL;
+  const buttonHandler = async () => {
+    if (loginStatus === true) {
+      try {
+        const response = await axios.post<BackendResponse>(
+          `${url}/api/auth/logout`,
+          {},
+          {
+            withCredentials: true,
+          }
+        );
+
+        if (response.data && response.data.success) {
+          dispatch(Logout());
+          setbuttonProp("Get Started");
+          toast.success("Logout Successfull");
+        } else {
+          toast.error("Unable to logout");
+          console.log(response.data.message);
+        }
+      } catch (error) {
+        if (error instanceof Error) {
+          toast.error(error.message);
+        }
+      }
+    } else {
+      navigate("/SignIn");
+    }
+  };
+
   const [neuron, setneuron] = useState("");
 
   const fetchBrain = async (e: React.FormEvent) => {
@@ -12,6 +59,14 @@ export const Navbar = () => {
     navigate(`/content/${neuron}`);
     setneuron("");
   };
+
+  useEffect(() => {
+    if (loginStatus === true) {
+      setbuttonProp("Logout");
+    } else {
+      setbuttonProp("Get Started");
+    }
+  }, [loginStatus]); // ✅ Correct
 
   return (
     <div>
@@ -43,13 +98,11 @@ export const Navbar = () => {
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <div className="flex min-h-auto flex-col items-center justify-center">
               <Button
-                onClick={() => {
-                  navigate("/SignIn");
-                }}
+                onClick={buttonHandler}
                 className="bg-purple-500 text-white border border-black"
                 size={"sm"}
               >
-                Get Started
+                {buttonprop}
               </Button>
             </div>
             <button

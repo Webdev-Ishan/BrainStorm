@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { Card } from "../Components/Card";
 import { Button } from "@/Components/ui/button";
+import { useSelector } from "react-redux";
+import type { RootState } from "../Redux/store";
 
 // ✅ Move outside the component for better reusability
 type ContentItem = {
@@ -25,12 +27,25 @@ type BackendResponse = {
 };
 
 const Profile = () => {
+  const navigate = useNavigate();
+  const [checkingAuth, setCheckingAuth] = useState(true);
+  const loginStatus = useSelector(
+    (state: RootState) => state.LoginReducer.login
+  );
+
+  useEffect(() => {
+    if (loginStatus === false) {
+      navigate("/SignIn");
+    }
+    setCheckingAuth(false);
+  }, [loginStatus]);
+
   const [username, setusername] = useState("");
   const [Email, setEmail] = useState("");
   const [arr, setarr] = useState<ContentItem[]>([]);
 
   const url = import.meta.env.VITE_API_URL;
-  const navigate = useNavigate();
+
   const fetchdata = async () => {
     try {
       const response = await axios.get<BackendResponse>(
@@ -60,10 +75,14 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    fetchdata();
-  }, []); // ✅ use empty dependency array to avoid infinite loop
+    if (loginStatus === true) {
+      fetchdata();
+    }
+  }, [loginStatus]); // ✅ use empty dependency array to avoid infinite loop
 
-  return (
+  return checkingAuth ? (
+    <div className="text-white text-center py-10">Loading...</div>
+  ) : (
     <div className="min-h-screen bg-gradient-to-br from-purple-600 via-purple-500 to-blue-500 text-white flex flex-col relative">
       {/* Top Right Update Profile Button */}
       <div className="absolute top-20 right-4">

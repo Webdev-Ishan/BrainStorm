@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 export const Footer = () => {
   return (
     <div>
-      <footer className="relative w-full bg-slate-200">
-        <div className="mx-auto w-full max-w-7xl px-8 bg-slate-200">
-          <div className="mx-auto grid text-center h-auto w-full grid-cols-1 gap-12 py-12 md:grid-cols-2 lg:grid-cols-3 bg-slate-200">
+      <footer className="relative w-full bg-white">
+        <div className="mx-auto w-full max-w-7xl px-8 bg-white">
+          <div className="mx-auto grid text-center h-auto w-full grid-cols-1 gap-12 py-12 md:grid-cols-2 lg:grid-cols-3 bg-white">
             <ul>
               <p className="font-sans antialiased text-xl  mb-6 font-semibold text-blue-600">
                 Company
@@ -64,7 +64,7 @@ export const Footer = () => {
                   Twitter
                 </a>
               </li>
-              <li className="mb-4 hover:scale-105 duration-300" >
+              <li className="mb-4 hover:scale-105 duration-300">
                 <a
                   href="https://github.com/Webdev-Ishan?tab=overview&from=2025-06-01&to=2025-06-14"
                   className="font-sans antialiased text-sm text-current py-1 hover:text-purple-500 hover:font-semibold duration-300"

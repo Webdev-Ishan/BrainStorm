@@ -85,28 +85,22 @@ export const HomePage = () => {
           thinking style and workflow.
         </p>
         <div className="flex flex-col md:flex-row justify-center gap-10">
-           <div className="bg-white p-6 border-black rounded-xl shadow-md border hover:border-blue-600 hover:scale-105 duration-200 hover:shadow-blue-500">
-            <h4 className="text-lg font-bold mb-4 text-blue-700">
-              STUDENTS
-            </h4>
+          <div className="bg-white p-6 border-black rounded-xl shadow-md border hover:border-blue-600 hover:scale-105 duration-200 hover:shadow-blue-500">
+            <h4 className="text-lg font-bold mb-4 text-blue-700">STUDENTS</h4>
             <p className="text-sm text-black">
               Research and study effectivly using the BrainStorm.
             </p>
           </div>
           <div className="bg-white p-6 border-black rounded-xl shadow-md border hover:border-blue-600 hover:scale-105 duration-200 hover:shadow-blue-500">
-            <h4 className="text-lg font-bold mb-4 text-blue-700">
-              DEVELOPERS
-            </h4>
+            <h4 className="text-lg font-bold mb-4 text-blue-700">DEVELOPERS</h4>
             <p className="text-sm text-black">
               Store Projects,Links and Code snippets in BrainStorm.
             </p>
           </div>
           <div className="bg-white p-6 border-black rounded-xl shadow-md border hover:border-blue-600 hover:scale-105 duration-200 hover:shadow-blue-500">
-            <h4 className="text-lg font-bold mb-4 text-blue-700">
-              WRITERS
-            </h4>
+            <h4 className="text-lg font-bold mb-4 text-blue-700">WRITERS</h4>
             <p className="text-sm text-black">
-               Capture ideas and scripts using the BrainStorm.
+              Capture ideas and scripts using the BrainStorm.
             </p>
           </div>
         </div>
@@ -137,46 +131,52 @@ export const HomePage = () => {
         <h3 className="text-3xl font-bold mb-8 text-white mt-8">
           WHAT OUR USER SAYS ABOUT US ?
         </h3>
-        <div className="relative w-full flex justify-center ">
+        <div className="relative w-full flex justify-center px-6 ">
           <Carousel className="w-full max-w-5xl">
-            {" "}
-            {/* Optional max width */}
-            <div className="relative flex items-center">
-              <CarouselPrevious className="absolute left-0 z-10 ml-2" />
-              <CarouselContent className="flex justify-center gap-4">
+            <CarouselContent>
+              <CarouselItem className="basis-full flex justify-center">
+                <div className="w-96 h-58 border border-black rounded-xl bg-pink-100 text-black p-6 shadow-md hover:border-blue-600  duration-200 hover:shadow-blue-600">
+                  <h4 className="text-xl font-semibold mb-4 text-blue-600">
+                    Priya Sharma
+                  </h4>
+                  <p>
+                    This platform has completely transformed the way I manage my
+                    class notes. The clean layout and simple tools helped me
+                    stay organized during exams. Highly recommended for students
+                    who want a digital edge!
+                  </p>
+                </div>
+              </CarouselItem>
 
-                <CarouselItem className="flex justify-center">
-                  <div className="border border-black rounded-xl bg-pink-100 text-black p-6 w-72 shadow-md hover:border-blue-600 hover:scale-110 duration-200 hover:shadow-blue-600">
-                    <h4 className="text-xl font-semibold mb-4 text-blue-600">
-                      Students
-                    </h4>
-                    <p>Organize class notes and research effortlessly 1.</p>
-                  </div>
-                </CarouselItem>
+              <CarouselItem className="basis-full flex justify-center">
+                <div className="w-96 h-58 border border-black rounded-xl bg-pink-100 text-black p-6 shadow-md hover:border-blue-600  duration-200 hover:shadow-blue-600">
+                  <h4 className="text-xl font-semibold mb-4 text-blue-600">
+                    Rahul Mehta
+                  </h4>
+                  <p>
+                    I loved how intuitive and responsive the design is. It made
+                    working on group projects much smoother, especially with the
+                    ability to categorize resources. Great work by the dev team!
+                  </p>
+                </div>
+              </CarouselItem>
 
-                <CarouselItem className="flex justify-center">
-                  <div className="border border-black rounded-xl bg-pink-100 text-black p-6 w-72 shadow-md hover:border-blue-600 hover:scale-110 duration-200 hover:shadow-blue-600">
-                    <h4 className="text-xl font-semibold mb-4 text-blue-600">
-                      Students
-                    </h4>
-                    <p>Organize class notes and research effortlessly 2.</p>
-                  </div>
-                </CarouselItem>
+              <CarouselItem className="basis-full flex justify-center">
+                <div className="w-96 h-58 border border-black rounded-xl bg-pink-100 text-black p-6 shadow-md hover:border-blue-600  duration-200 hover:shadow-blue-600">
+                  <h4 className="text-xl font-semibold mb-4 text-blue-600">
+                    Aditi Verma
+                  </h4>
+                  <p>
+                    From taking notes to organizing research for client work,
+                    this tool fits perfectly into my daily workflow. The
+                    interface is modern, and everything just works flawlessly.
+                  </p>
+                </div>
+              </CarouselItem>
+            </CarouselContent>
 
-
-                <CarouselItem className="flex justify-center">
-                  <div className="border border-black rounded-xl bg-pink-100 text-black p-6 w-72 shadow-md hover:border-blue-600 hover:scale-110 duration-200 hover:shadow-blue-600">
-                    <h4 className="text-xl font-semibold mb-4 text-blue-600">
-                      Students
-                    </h4>
-                    <p>Organize class notes and research effortlessly 3.</p>
-                  </div>
-                </CarouselItem>
-
-
-              </CarouselContent>
-              <CarouselNext className="absolute right-0 z-10 mr-2" />
-            </div>
+            <CarouselPrevious />
+            <CarouselNext />
           </Carousel>
         </div>
       </section>
