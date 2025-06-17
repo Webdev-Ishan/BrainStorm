@@ -72,14 +72,7 @@ export const makeReview = async (req: Request, res: Response) => {
 };
 
 export const getreview = async (req: Request, res: Response) => {
-  const userid = req.user?.id;
-
-  if (!userid) {
-    return res.status(411).json({
-      success: false,
-      message: "Ids not found",
-    });
-  }
+  
 
   try {
     const reviews = await reviewModel.find();

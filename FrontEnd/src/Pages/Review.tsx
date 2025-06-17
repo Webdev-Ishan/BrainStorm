@@ -1,8 +1,10 @@
 import { Button } from "@/Components/ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import type { RootState } from "@/Redux/store";
 
 type BackendResponse = {
   success: boolean;
@@ -10,9 +12,14 @@ type BackendResponse = {
 };
 
 export const Review = () => {
+  const navigate = useNavigate();
+
+  const loginStatus = useSelector(
+    (state: RootState) => state.LoginReducer.login
+  );
+
   const [Fullname, setFullname] = useState("");
   const [review, setreview] = useState("");
-  const navigate = useNavigate();
   const url = import.meta.env.VITE_API_URL;
 
   const submithandler = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -52,6 +59,12 @@ export const Review = () => {
       }
     }
   };
+
+  useEffect(() => {
+    if (loginStatus === false) {
+      navigate("/SignIn");
+    }
+  }, []);
 
   return (
     <div className="bg-gradient-to-br mt-16 from-purple-500 to-blue-500 py-12 px-4 md:px-0">

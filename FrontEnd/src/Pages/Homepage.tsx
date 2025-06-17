@@ -45,7 +45,6 @@ export const HomePage = () => {
     } catch (error) {
       if (error instanceof Error) {
         console.log(error);
-        toast.error(error.message);
       }
     }
   };
