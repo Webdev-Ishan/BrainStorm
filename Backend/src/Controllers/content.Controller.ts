@@ -20,7 +20,7 @@ export const addContent = async (req: Request, res: Response) => {
   const parsedbody = contentSchema.safeParse(req.body);
 
   if (!parsedbody.success) {
-    return res.status(411).json({
+    return res.status(403).json({
       success: false,
       message: "Input fields are incorrect",
       errors: parsedbody.error.flatten(),
