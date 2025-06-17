@@ -131,7 +131,7 @@ export const HomePage = () => {
         <h3 className="text-3xl font-bold mb-8 text-white mt-8">
           WHAT OUR USER SAYS ABOUT US ?
         </h3>
-        <div className="relative w-full flex justify-center px-6 ">
+        <div className="relative w-full flex justify-center px-24 ">
           <Carousel className="w-full max-w-5xl">
             <CarouselContent>
               <CarouselItem className="basis-full flex justify-center">
@@ -178,6 +178,17 @@ export const HomePage = () => {
             <CarouselPrevious />
             <CarouselNext />
           </Carousel>
+           <div className="flex min-h-auto flex-col items-center justify-top">
+          <Button
+            onClick={() => {
+              navigate("/Review");
+            }}
+            className="bg-white text-blue-500  border border-black"
+            size={"sm"}
+          >
+            REVIEW US
+          </Button>
+        </div>
         </div>
       </section>
     </div>

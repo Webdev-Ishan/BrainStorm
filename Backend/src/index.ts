@@ -6,9 +6,10 @@ import { connectToDb } from "./Config/DB";
 import authRoutes from "./Routes/auth.Routes";
 import contentRoutes from "./Routes/content.Routes";
 import tagRoutes from "./Routes/tag.Routes";
-import contactRouter from "./Routes/contact.Routes";
+import contactRoutes from "./Routes/contact.Routes";
+import reviewRoutes from "./Routes/review.Routes";
 import cookieParser from "cookie-parser";
-import cors from 'cors'
+import cors from "cors";
 
 const port = process.env.PORT || 3000;
 
@@ -22,11 +23,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-
 app.use("/api/auth", authRoutes);
 app.use("/api/user", contentRoutes);
-app.use("/api/tags",tagRoutes);
-app.use("/api/contact",contactRouter);
+app.use("/api/tags", tagRoutes);
+app.use("/api/contact", contactRoutes);
+app.use("/api/review", reviewRoutes);
 
 (async function () {
   try {

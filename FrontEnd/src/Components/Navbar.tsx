@@ -99,7 +99,7 @@ export const Navbar = () => {
             <div className="flex min-h-auto flex-col items-center justify-center">
               <Button
                 onClick={buttonHandler}
-                className="bg-purple-500 text-white border border-black"
+                className={loginStatus?" bg-red-500 text-white border border-black":" bg-purple-500 text-white border border-black"}
                 size={"sm"}
               >
                 {buttonprop}
