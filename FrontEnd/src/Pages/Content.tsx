@@ -47,11 +47,11 @@ export const Content = () => {
       const response = await axios.post<BackendResponse>(
         `${url}/api/user/content`,
         {
-        title: Title,
-        link: link,
-        type: type,
-        tags: tags, // ✅ tags is a string[]
-      },
+          title: Title,
+          link: link,
+          type: type,
+          tags: tags, // ✅ tags is a string[]
+        },
         {
           headers: {
             "Content-Type": "application/json",
@@ -69,7 +69,7 @@ export const Content = () => {
         settags(["", "", ""]);
       } else {
         toast.error("Oops! Try again");
-        console.log(response.data)
+        
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -174,4 +174,3 @@ export const Content = () => {
     </div>
   );
 };
-
