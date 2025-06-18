@@ -85,7 +85,7 @@ const Profile = () => {
   ) : (
     <div className="min-h-screen bg-gradient-to-br from-purple-600 via-purple-500 to-blue-500 text-white flex flex-col relative">
       {/* Top Right Update Profile Button */}
-      <div className="absolute top-20 right-4">
+      <div className="absolute top-20  right-4">
         <div className="flex min-h-auto ab flex-col items-center justify-center">
           <Button
             onClick={() => {
@@ -101,14 +101,14 @@ const Profile = () => {
 
       <main className="flex flex-col items-center justify-center flex-grow px-6 text-center py-20 bg-gradient-to-b from-purple-600 to-blue-500">
         <h2
-          className="text-3xl md:text-5xl font-extrabold text-white mt-4 mb-10 drop-shadow-lg tracking-wide"
+          className="text-3xl md:text-5xl font-extrabold text-white mt-4 mb-10 drop-shadow-lg tracking-wide flex "
           style={{
             WebkitTextStrokeWidth: "1px",
             WebkitTextStrokeColor: "#000",
           }}
         >
           Welcome,&nbsp;
-          <span className="text-blue-500 uppercase">{username}</span>
+          <span className="text-blue-500 uppercase font-bold">{username}</span>
         </h2>
 
         <p className="text-base md:text-lg text-white/90 max-w-2xl mb-6 leading-relaxed">
@@ -142,7 +142,7 @@ const Profile = () => {
       {/* ✅ Mapping all items of arr */}
       <section className="w-full bg-black min-h-[50vh]">
         <h2
-          className="text-4xl mt-16 text-center md:text-4xl font-extrabold text-blue-500  mb-2  tracking-wide"
+          className="text-4xl mr-2 ml-2 mt-16 text-center md:text-4xl font-extrabold text-blue-500  mb-2  tracking-wide"
           style={{
             WebkitTextStrokeWidth: "1px",
             WebkitTextStrokeColor: "white",
@@ -153,12 +153,35 @@ const Profile = () => {
         <div className="w-full min-h-[60vh] py-16 px-4 flex justify-center items-center flex-wrap gap-6 md:gap-10 bg-black rounded-xl ">
           {arr.length > 0 ? (
             arr.map((item, index) => (
-              <Card
-                key={index}
-                link={item.link}
-                title={item.title}
-                type={item.type}
-              />
+              <div className="card bg-white rounded-2xl w-64 h-auto shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <figure className="px-5 pt-5">
+                  <div className="w-full h-60 rounded-lg border border-gray-200 p-3 bg-gray-50">
+                    <Card
+                      key={index}
+                      link={item.link}
+                      title={item.title}
+                      type={item.type}
+                    />
+                  </div>
+                </figure>
+                <div className="card-body px-5 py-4">
+                  <h2 className="text-lg font-semibold text-gray-800 mb-2">
+                    {item.title}
+                  </h2>
+                  <div className="flex justify-end ">
+                    <a
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block"
+                    >
+                      <button className="px-4 py-2 text-sm font-medium rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 text-white hover:from-indigo-600 hover:to-blue-500 transition-colors duration-300 shadow-md hover:shadow-lg">
+                        Visit Link
+                      </button>
+                    </a>
+                  </div>
+                </div>
+              </div>
             ))
           ) : (
             <p className="text-black">No content added yet.</p>

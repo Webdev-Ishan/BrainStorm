@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 export const Footer = () => {
   return (
     <div>
-      <footer className="relative w-full bg-white">
-        <div className="mx-auto w-full max-w-7xl px-8 bg-white">
-          <div className="mx-auto grid text-center h-auto w-full grid-cols-1 gap-12 py-12 md:grid-cols-2 lg:grid-cols-3 bg-white">
+      <footer className="relative w-full bg-slate-600 text-white">
+        <div className="mx-auto w-full max-w-7xl px-8 bg-slate-600 text-white">
+          <div className="mx-auto grid text-center h-auto w-full grid-cols-1 gap-12 py-12 md:grid-cols-2 lg:grid-cols-3 bg-slate-600 text-white">
             <ul>
               <p className="font-sans antialiased text-xl  mb-6 font-semibold text-blue-600">
                 Company

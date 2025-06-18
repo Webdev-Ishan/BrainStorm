@@ -50,7 +50,7 @@ const Brain = () => {
     fetchBrain();
   }, [neuron]);
   return (
-    <div className="w-full h-full bg-black pt-24 pb-8 mb-16 ">
+    <div className="w-full h-full bg-black pt-24 pb-8  ">
       {type? <Card type={type} link={link} />:
       
         <div className="flex flex-col justify-between items-center space-y-3">
