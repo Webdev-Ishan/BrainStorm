@@ -51,8 +51,9 @@ const Brain = () => {
   }, [neuron]);
   return (
     <div className="w-full h-full bg-black pt-24 pb-8  ">
-      {type? <Card type={type} link={link} />:
-      
+      {type ? (
+        <Card type={type} link={link} />
+      ) : (
         <div className="flex flex-col justify-between items-center space-y-3">
           <Skeleton className="h-[125px] w-[250px] rounded-xl" />
           <div className="space-y-2">
@@ -60,7 +61,7 @@ const Brain = () => {
             <Skeleton className="h-4 w-[200px]" />
           </div>
         </div>
-      }
+      )}
     </div>
   );
 };
