@@ -26,9 +26,16 @@ type BackendResponse = {
   };
 };
 
+type BackendResponse2 = {
+  success: boolean;
+  message: string;
+  searchresult: ContentItem[];
+};
+
 const Profile = () => {
   const navigate = useNavigate();
   const [checkingAuth, setCheckingAuth] = useState(true);
+
   const loginStatus = useSelector(
     (state: RootState) => state.LoginReducer.login
   );
@@ -43,6 +50,7 @@ const Profile = () => {
   const [username, setusername] = useState("");
   const [Email, setEmail] = useState("");
   const [arr, setarr] = useState<ContentItem[]>([]);
+  const [query, setquery] = useState("");
 
   const url = import.meta.env.VITE_API_URL;
 
@@ -74,11 +82,45 @@ const Profile = () => {
     }
   };
 
+  const formdata = new FormData();
+  formdata.append("query", query);
+
+  const onSearch = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post<BackendResponse2>(
+        `${url}/api/user/search`,
+        formdata,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+
+      if (response.data && response.data.success) {
+        setarr(response.data.searchresult); // ✅ now an array
+        setquery("");
+        console.log("success");
+      } else {
+        toast.error("Oops! Try Searching Again");
+        setquery("");
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error);
+        toast.error(error.message);
+        setquery("");
+      }
+    }
+  };
+
   useEffect(() => {
     if (loginStatus === true) {
       fetchdata();
     }
-  }, [loginStatus]); // ✅ use empty dependency array to avoid infinite loop
+  }, []); // ✅ use empty dependency array to avoid infinite loop
 
   return checkingAuth ? (
     <div className="text-white text-center py-10">Loading...</div>
@@ -138,6 +180,16 @@ const Profile = () => {
           </Button>
         </div>
       </main>
+
+      <form onSubmit={onSearch}>
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setquery(e.target.value)}
+          className="w-full max-w-2xl ml-5 px-5 rounded-xl border border-purple-500 bg-white text-gray-800 placeholder-gray-400 shadow-md focus:outline-none focus:ring-2 focus:ring-purple-400 transition duration-300"
+          placeholder="🔍 Enter Neuron..."
+        />
+      </form>
 
       {/* ✅ Mapping all items of arr */}
       <section className="w-full bg-black min-h-[50vh]">

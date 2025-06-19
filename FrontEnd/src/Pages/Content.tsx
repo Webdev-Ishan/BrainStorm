@@ -61,7 +61,7 @@ export const Content = () => {
       );
 
       if (response.data && response.data.success) {
-        toast.success("Validation successful");
+        toast.success("Content Added");
         navigate("/Profile");
         setTitle("");
         setlink("");
@@ -69,7 +69,6 @@ export const Content = () => {
         settags(["", "", ""]);
       } else {
         toast.error("Oops! Try again");
-        
       }
     } catch (error) {
       if (error instanceof Error) {

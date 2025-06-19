@@ -10,6 +10,9 @@ import {
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { Login, Logout } from "../Redux/LoginSlice";
+import Cookies from "js-cookie";
 
 type ContentItem = {
   name: string;
@@ -26,6 +29,8 @@ export const HomePage = () => {
   const navigate = useNavigate();
   const [reviews, setreviews] = useState<ContentItem | null>();
   const url = import.meta.env.VITE_API_URL;
+
+  const dispatch = useDispatch();
 
   const fetchReviews = async () => {
     try {
@@ -51,6 +56,13 @@ export const HomePage = () => {
 
   useEffect(() => {
     fetchReviews();
+    const token = Cookies.get("token");
+
+    if (token) {
+      dispatch(Login()); // or dispatch(setUser(...)) if you store user
+    } else {
+      dispatch(Logout());
+    }
   });
 
   return (
