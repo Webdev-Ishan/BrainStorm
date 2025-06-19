@@ -16,4 +16,5 @@ contentRouter.get(
 );
 contentRouter.delete("/content/:id", authUser, contentController.deleteContent);
 contentRouter.put("/updateInfo/:id",authUser,contentController.UpdateController);
+contentRouter.post("/search",authUser,contentController.Search);
 export default contentRouter;

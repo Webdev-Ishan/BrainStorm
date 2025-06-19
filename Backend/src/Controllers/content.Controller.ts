@@ -6,12 +6,17 @@ import tagModel from "../Models/tag.Model";
 import LinkModel from "../Models/Link.Model";
 import generateShortLink from "../Utils/hashGenerator";
 import transporter from "../Config/nodemailer.config";
+import { Collection } from "mongoose";
 
 const contentSchema = z.object({
   link: z.string(),
   type: z.string(),
   title: z.string(),
   tags: z.array(z.string()),
+});
+
+const searchSchema = z.object({
+  query: z.string(),
 });
 
 export type finalcontent = z.infer<typeof contentSchema>;
@@ -401,7 +406,7 @@ export const getContentviaLink = async (req: Request, res: Response) => {
   try {
     let content = await contentModel
       .findOne({ sharable: neuron })
-      .populate("userID", "username" );
+      .populate("userID", "username");
 
     if (!content) {
       return res.status(403).json({
@@ -423,6 +428,81 @@ export const getContentviaLink = async (req: Request, res: Response) => {
       });
     }
   }
+  return res.status(500).json({
+    success: false,
+    message: "Internal Server Error",
+  });
+};
+
+export const Search = async (req: Request, res: Response) => {
+  const parsedbody = searchSchema.safeParse(req.body);
+
+  if (!parsedbody.success) {
+    return res.status(403).json({
+      success: false,
+      message: "Input fields are incorrect",
+      errors: parsedbody.error.flatten(),
+    });
+  }
+  const { query } = parsedbody.data;
+
+  const userid = req.user?.id;
+
+  if (!userid) {
+    return res.status(403).json({
+      success: false,
+      message: "id not found",
+    });
+  }
+
+  try {
+    let exist = await userModel.findById(userid);
+    if (!exist) {
+      return res.status(403).json({
+        success: false,
+        message: "User  not found",
+      });
+    }
+
+    const searchresult = await contentModel.aggregate([
+      {
+        $search: {
+          index: "searchIndex",
+          text: {
+            query: query,
+            path: "title",
+            fuzzy: {},
+          },
+        },
+      },
+
+      {
+        $limit: 10,
+      },
+    ]);
+
+    if (!searchresult) {
+      return res.status(403).json({
+        success: false,
+        message: "Not able to search",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      query,
+      searchresult,
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      return res.status(500).json({
+        success: false,
+        message: "Something went wrong",
+        error: error,
+      });
+    }
+  }
+
   return res.status(500).json({
     success: false,
     message: "Internal Server Error",
