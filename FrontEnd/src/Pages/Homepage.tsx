@@ -64,7 +64,7 @@ export const HomePage = () => {
 
   useEffect(() => {
     axios
-      .get("/api/auth/profile", { withCredentials: true })
+      .get(`${url}/api/auth/profile`, { withCredentials: true })
       .then(() => {
         dispatch(Login());
       })
