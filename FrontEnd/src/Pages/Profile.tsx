@@ -75,7 +75,6 @@ const Profile = () => {
     } catch (error) {
       if (error instanceof Error) {
         console.log(error);
-        toast.error(error.message);
         setEmail("");
         setusername("");
       }
@@ -193,17 +192,26 @@ const Profile = () => {
           YOUR SAVED LINKS ARE HERE
         </h2>
 
-         <div className=" p-8 text-center">
-      <form onSubmit={onSearch}>
-        <input
-          type="text"
-          value={query}
-          onChange={(e) => setquery(e.target.value)}
-          className="w-full max-w-2xl ml-5 px-5 rounded-lg border border-blue-500 bg-white text-gray-800 placeholder-gray-400 shadow-md focus:outline-none focus:ring-2 focus:ring-purple-400 transition duration-300"
-          placeholder="🔍Search by Keywords"
-        />
-      </form>
-</div>
+        <div className=" p-8 text-center w-full flex justify-center items-center  gap-4">
+          <form onSubmit={onSearch} className="w-full">
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setquery(e.target.value)}
+              className="w-full max-w-2xl ml-5 px-5  rounded-lg border border-blue-500 bg-white text-gray-800 placeholder-gray-400 shadow-md focus:outline-none focus:ring-2 focus:ring-purple-400 transition duration-300"
+              placeholder="🔍Search by Keywords"
+            />
+          </form>
+          <Button
+            onClick={() => {
+              fetchdata();
+            }}
+            className="bg-blue-400 text-white border ml-2 mr-2 border-black"
+            size={"default"}
+          >
+            Back
+          </Button>
+        </div>
         <div className="w-full min-h-[60vh] py-16 px-4 flex justify-center items-center flex-wrap gap-6 md:gap-10 bg-black rounded-xl ">
           {arr.length > 0 ? (
             arr.map((item, index) => (
