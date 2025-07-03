@@ -15,7 +15,7 @@ const port = process.env.PORT || 3000;
 
 app.use(
   cors({
-    origin: "http://localhost:5173", // Replace with your frontend URL
+    origin: "https://brainstorm-frontend.onrender.com", // Replace with your frontend URL
     credentials: true,
   })
 );
