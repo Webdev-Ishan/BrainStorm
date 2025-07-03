@@ -100,7 +100,7 @@ const Profile = () => {
       );
 
       if (response.data && response.data.success) {
-        setarr(response.data.searchresult); // ✅ now an array
+        setarr(response.data.searchresult);
         setquery("");
         console.log("success");
       } else {
@@ -181,16 +181,6 @@ const Profile = () => {
         </div>
       </main>
 
-      <form onSubmit={onSearch}>
-        <input
-          type="text"
-          value={query}
-          onChange={(e) => setquery(e.target.value)}
-          className="w-full max-w-2xl ml-5 px-5 rounded-xl border border-purple-500 bg-white text-gray-800 placeholder-gray-400 shadow-md focus:outline-none focus:ring-2 focus:ring-purple-400 transition duration-300"
-          placeholder="🔍 Enter Neuron..."
-        />
-      </form>
-
       {/* ✅ Mapping all items of arr */}
       <section className="w-full bg-black min-h-[50vh]">
         <h2
@@ -202,6 +192,18 @@ const Profile = () => {
         >
           YOUR SAVED LINKS ARE HERE
         </h2>
+
+         <div className=" p-8 text-center">
+      <form onSubmit={onSearch}>
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setquery(e.target.value)}
+          className="w-full max-w-2xl ml-5 px-5 rounded-lg border border-blue-500 bg-white text-gray-800 placeholder-gray-400 shadow-md focus:outline-none focus:ring-2 focus:ring-purple-400 transition duration-300"
+          placeholder="🔍Search by Keywords"
+        />
+      </form>
+</div>
         <div className="w-full min-h-[60vh] py-16 px-4 flex justify-center items-center flex-wrap gap-6 md:gap-10 bg-black rounded-xl ">
           {arr.length > 0 ? (
             arr.map((item, index) => (

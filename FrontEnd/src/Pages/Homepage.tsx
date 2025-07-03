@@ -12,7 +12,8 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { Login, Logout } from "../Redux/LoginSlice";
-import Cookies from "js-cookie";
+import { TypewriterEffectSmooth } from "../Components/ui/typewriter-effect";
+import { Spotlight } from "../Components/ui/Spotlight";
 
 type ContentItem = {
   name: string;
@@ -22,13 +23,20 @@ type ContentItem = {
 type BackendResponse = {
   success: boolean;
   message: string;
-  reviews: ContentItem;
+  reviews: ContentItem[]; // <-- array, not single object
 };
 
 export const HomePage = () => {
   const navigate = useNavigate();
-  const [reviews, setreviews] = useState<ContentItem | null>();
+  const [reviews, setreviews] = useState<ContentItem[]>([]);
   const url = import.meta.env.VITE_API_URL;
+
+  const words = [
+    {
+      text: "Clarity.",
+      className: "text-blue-600 text-5xl text-center ",
+    },
+  ];
 
   const dispatch = useDispatch();
 
@@ -43,7 +51,7 @@ export const HomePage = () => {
       );
 
       if (response.data && response.data.success) {
-        setreviews(response.data.reviews);
+        setreviews(response.data.reviews); // reviews is now an array
       } else {
         toast.error("Oops! Try Again");
       }
@@ -55,45 +63,48 @@ export const HomePage = () => {
   };
 
   useEffect(() => {
+    axios
+      .get("/api/auth/profile", { withCredentials: true })
+      .then(() => {
+        dispatch(Login());
+      })
+      .catch(() => {
+        dispatch(Logout());
+      });
     fetchReviews();
-    const token = Cookies.get("token");
-
-    if (token) {
-      dispatch(Login()); // or dispatch(setUser(...)) if you store user
-    } else {
-      dispatch(Logout());
-    }
-  });
+  }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-600 via-purple-500 to-blue-500 text-white flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-purple-600 via-purple-500 to-blue-500 text-white flex flex-col ">
       {/* Hero Section */}
+
+      <Spotlight className="-top-40 left-0 md:-top-20 " fill="cyan" />
       <main className="flex flex-col items-center justify-center flex-grow px-6 text-center py-16">
         <h2
-          className="text-4xl md:text-5xl font-bold text-white mt-8 drop-shadow-lg mb-6"
+          className="text-4xl md:text-5xl font-bold text-white mt-8 text-center drop-shadow-lg mb-6"
           style={{
             WebkitTextStrokeWidth: "1px",
             WebkitTextStrokeColor: "black",
           }}
         >
           Organize your thoughts with <br />
-          <span className="text-blue-600">Clarity</span>
+          <div className="flex justify-center">
+            <TypewriterEffectSmooth words={words} />
+          </div>
         </h2>
         <p className="text-md md:text-lg text-white/90 max-w-2xl mb-8">
           BrainStorm is your second brain — a digital space to capture, link,
           and retrieve your best ideas with ease.
         </p>
-        <div className="flex min-h-auto flex-col items-center justify-center">
-          <Button
-            onClick={() => {
-              navigate("/About");
-            }}
-            className="bg-purple-500 text-white border border-black"
-            size={"sm"}
-          >
-            KNOW US
-          </Button>
-        </div>
+        <button
+          onClick={() => navigate("/About")}
+          className="relative inline-flex h-12 overflow-hidden rounded-2xl p-[2px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 mt-6"
+        >
+          <span className="absolute inset-[-1000%]  animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+          <span className="inline-flex hover:text-black border border-black duration-300 h-full w-full cursor-pointer items-center justify-center rounded-xl bg-blue-500 px-4 py-[2px] text-sm font-bold text-white backdrop-blur-3xl">
+            Know Us
+          </span>
+        </button>
       </main>
 
       {/* Section 1: Features */}
