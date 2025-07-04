@@ -216,7 +216,7 @@ const Profile = () => {
         <div className="w-full min-h-[60vh] py-16 px-4 flex justify-center items-center flex-wrap gap-6 md:gap-10 bg-black rounded-xl ">
           {arr.length > 0 ? (
             arr.map((item, index) => (
-              <div className="card bg-white rounded-2xl w-64 h-auto shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <div className="card bg-white rounded-2xl w-64 pr-2 h-auto shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <figure className="px-5 pt-5">
                   <div className="w-full h-60 rounded-lg border border-gray-200 p-3 bg-gray-50">
                     <Card
