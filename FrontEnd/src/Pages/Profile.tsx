@@ -247,11 +247,9 @@ const Profile = () => {
 
                      <Link
                       to={`/content/${item.userID}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
                       className="inline-block"
                     >
-                      <button className="px-4 py-2 text-sm font-medium rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 text-white hover:from-indigo-600 hover:to-blue-500 transition-colors duration-300 shadow-md hover:shadow-lg">
+                      <button className="px-4 py-2 ml-2 text-sm font-medium rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 text-white hover:from-indigo-600 hover:to-blue-500 transition-colors duration-300 shadow-md hover:shadow-lg">
                         Edit
                       </button>
                     </Link>

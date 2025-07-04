@@ -66,8 +66,9 @@ export const HomePage = () => {
     const token = localStorage.getItem("token");
     if (token) {
       dispatch(Login());
-    }
+    }else{
     dispatch(Logout());
+    }
     fetchReviews();
   }, []);
 
