@@ -17,6 +17,7 @@ export const Contact = () => {
   type BackendResponse = {
     success: boolean;
     message: string;
+    token:string;
   };
 
   const submithandler = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -40,6 +41,7 @@ export const Contact = () => {
       );
 
       if (response.data.success) {
+         localStorage.setItem("token", response.data.token);
         naviagte("/");
         toast.success("Response Submitted");
         setFullname("");
