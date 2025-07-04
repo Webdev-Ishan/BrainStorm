@@ -13,6 +13,7 @@ import cors from "cors";
 
 const port = process.env.PORT || 3000;
 
+app.set("trust proxy", 1); 
 app.use(
   cors({
     origin: "https://www.brainstormideas.xyz", // Replace with your frontend URL
