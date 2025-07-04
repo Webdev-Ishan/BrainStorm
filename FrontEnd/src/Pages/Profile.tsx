@@ -53,7 +53,7 @@ const Profile = () => {
   const [query, setquery] = useState("");
 
   const url = import.meta.env.VITE_API_URL;
-const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
 
   const fetchdata = async () => {
     try {
@@ -61,8 +61,8 @@ const token = localStorage.getItem("token");
         `${url}/api/auth/profile`,
         {
           headers: {
-    Authorization: `Bearer ${token}`, // ✅ token as header
-  },
+            Authorization: `Bearer ${token}`, // ✅ token as header
+          },
         }
       );
 
@@ -84,20 +84,18 @@ const token = localStorage.getItem("token");
     }
   };
 
-  const formdata = new FormData();
-  formdata.append("query", query);
+  
 
   const onSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const response = await axios.post<BackendResponse2>(
         `${url}/api/user/search`,
-        formdata,
+        query,
         {
           headers: {
-            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // ✅ token as header
           },
-          withCredentials: true,
         }
       );
 
