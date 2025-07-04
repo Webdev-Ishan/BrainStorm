@@ -60,9 +60,7 @@ export const SignIn = () => {
         `${url}/api/auth/signin`,
         formdata,
         {
-          headers: {
-            "Content-Type": "application/json",
-          },
+          
           withCredentials: true,
         }
       );
