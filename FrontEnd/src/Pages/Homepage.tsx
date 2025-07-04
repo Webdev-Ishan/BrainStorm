@@ -63,14 +63,11 @@ export const HomePage = () => {
   };
 
   useEffect(() => {
-    axios
-      .get(`${url}/api/auth/profile`, { withCredentials: true })
-      .then(() => {
-        dispatch(Login());
-      })
-      .catch(() => {
-        dispatch(Logout());
-      });
+    const token = localStorage.getItem("token");
+    if (token) {
+      dispatch(Login());
+    }
+    dispatch(Logout());
     fetchReviews();
   }, []);
 

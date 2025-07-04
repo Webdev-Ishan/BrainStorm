@@ -15,6 +15,7 @@ export const Content = () => {
   type BackendResponse = {
     success: boolean;
     message: string;
+    token:string;
   };
 
   const validateTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,11 +38,7 @@ export const Content = () => {
 
   const submithandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formdata = new FormData();
-    formdata.append("title", Title);
-    formdata.append("link", link);
-    formdata.append("type", type);
-    formdata.append("tags", tags.join(",")); // Joining tags into comma-separated string
+
 
     try {
       const response = await axios.post<BackendResponse>(
@@ -53,7 +50,7 @@ export const Content = () => {
           tags: tags, // ✅ tags is a string[]
         },
         {
-          headers: {
+           headers: {
             "Content-Type": "application/json",
           },
           withCredentials: true,
@@ -61,6 +58,7 @@ export const Content = () => {
       );
 
       if (response.data && response.data.success) {
+        localStorage.setItem("token", response.data.token);
         toast.success("Content Added");
         navigate("/Profile");
         setTitle("");

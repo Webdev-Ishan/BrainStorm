@@ -6,12 +6,14 @@ import { Card } from "../Components/Card";
 import { Button } from "@/Components/ui/button";
 import { useSelector } from "react-redux";
 import type { RootState } from "../Redux/store";
+import { Link } from "react-router-dom";
 
 // ✅ Move outside the component for better reusability
 type ContentItem = {
   link: string;
   type: string;
   title: string;
+  userID:string;
 };
 
 type BackendResponse = {
@@ -242,12 +244,23 @@ const Profile = () => {
                         Visit Link
                       </button>
                     </a>
+
+                     <Link
+                      to={`/content/${item.userID}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block"
+                    >
+                      <button className="px-4 py-2 text-sm font-medium rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 text-white hover:from-indigo-600 hover:to-blue-500 transition-colors duration-300 shadow-md hover:shadow-lg">
+                        Edit
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </div>
             ))
           ) : (
-            <p className="text-black">No content added yet.</p>
+            <p className="text-white">No content added yet.</p>
           )}
         </div>
       </section>
