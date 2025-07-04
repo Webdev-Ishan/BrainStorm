@@ -12,7 +12,7 @@ export const SignIn = () => {
   const loginStatus = useSelector(
     (state: RootState) => state.LoginReducer.login
   );
-  if (loginStatus == true) {
+  if (loginStatus === true) {
     navigate("/Profile");
   }
 

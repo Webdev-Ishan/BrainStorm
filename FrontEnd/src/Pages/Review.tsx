@@ -9,6 +9,7 @@ import type { RootState } from "@/Redux/store";
 type BackendResponse = {
   success: boolean;
   message: string;
+  token: string;
 };
 
 export const Review = () => {
@@ -41,6 +42,7 @@ export const Review = () => {
       );
 
       if (response.data && response.data.success) {
+        localStorage.setItem("token", response.data.token);
         toast.success("Review successfull");
         navigate("/Profile");
         setreview("");
