@@ -56,7 +56,7 @@ export const Navbar = () => {
 
   const fetchBrain = async (e: React.FormEvent) => {
     e.preventDefault();
-    navigate(`/content/${neuron}`);
+    navigate(`/braincontent/${neuron}`);
     setneuron("");
   };
 
