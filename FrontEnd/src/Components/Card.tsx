@@ -19,7 +19,7 @@ export const Card = ({ type, link }: CardProps) => {
             src={`https://twitframe.com/show?url=${encodeURIComponent(link)}`}
             width="240"
             height="240"
-            frameBorder="0"
+            style={{ border: "none", overflow: "hidden" }}
             allowFullScreen
           ></iframe>
         );
@@ -32,7 +32,7 @@ export const Card = ({ type, link }: CardProps) => {
             height="240"
             style={{ border: "none", overflow: "hidden" }}
             scrolling="no"
-            frameBorder="0"
+            
             allow="encrypted-media"
             allowFullScreen
           ></iframe>
@@ -44,7 +44,7 @@ export const Card = ({ type, link }: CardProps) => {
             src={`https://www.instagram.com/p/${extractInstagramId(link)}/embed`}
             width="240"
             height="240"
-            frameBorder="0"
+            style={{ border: "none", overflow: "hidden" }}
             allowFullScreen
           ></iframe>
         );
@@ -55,7 +55,7 @@ export const Card = ({ type, link }: CardProps) => {
             src={link}
             width="240"
             height="240"
-            frameBorder="0"
+            style={{ border: "none", overflow: "hidden" }}
             allowFullScreen
           ></iframe>
         );
@@ -67,7 +67,7 @@ export const Card = ({ type, link }: CardProps) => {
             src={`https://www.youtube.com/embed/${id}`}
             width="240"
             height="240"
-            frameBorder="0"
+            style={{ border: "none", overflow: "hidden" }}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           ></iframe>
@@ -81,22 +81,21 @@ export const Card = ({ type, link }: CardProps) => {
     }
   };
 
-  return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "240px",
-        width: "240px",
-        overflow: "hidden",
-        borderRadius: "8px",
-        backgroundColor: "#fff",
-      }}
-    >
+return (
+  <div
+    className="flex items-center justify-center h-60 w-full rounded-lg bg-gray-50 border border-gray-200 shadow-inner overflow-hidden"
+    style={{
+      minHeight: "240px",
+      minWidth: "240px",
+      maxHeight: "240px",
+      maxWidth: "240px",
+    }}
+  >
+    <div className="flex items-center justify-center w-full h-full">
       {renderEmbed()}
     </div>
-  );
+  </div>
+);
 };
 
 // Helper function for Instagram
