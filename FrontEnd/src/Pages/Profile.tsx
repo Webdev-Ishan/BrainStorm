@@ -91,7 +91,7 @@ const Profile = () => {
     try {
       const response = await axios.post<BackendResponse2>(
         `${url}/api/user/search`,
-        query,
+        {query},
         {
           headers: {
             Authorization: `Bearer ${token}`, // ✅ token as header
