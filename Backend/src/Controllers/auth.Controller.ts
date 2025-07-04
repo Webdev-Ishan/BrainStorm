@@ -57,12 +57,7 @@ export const SignupController = async (req: Request, res: Response) => {
       expiresIn: "1d",
     });
 
-    res.cookie("token", token, {
-      httpOnly: true,
-      maxAge: 1 * 24 * 60 * 60 * 1000, // 1 day
-      sameSite: "none",
-      secure: true,
-    });
+   
 
     const mailoptions = {
       from: process.env.SENDER_EMAIL,
@@ -77,6 +72,7 @@ export const SignupController = async (req: Request, res: Response) => {
       success: true,
       message: "Validation successfull",
       user,
+      token
     });
   } catch (error) {
     if (error instanceof Error) {
@@ -126,17 +122,12 @@ export const SigninController = async (req: Request, res: Response) => {
       expiresIn: "1d",
     });
 
-    res.cookie("token", token, {
-      httpOnly: true,
-      maxAge: 1 * 24 * 60 * 60 * 1000, // 1 day
-      secure: true,
-      sameSite: "none",
-      
-    });
+   
 
     return res.status(200).json({
       success: true,
       message: "Logged in SuccessFull",
+      token
     });
   } catch (error) {
     if (error instanceof Error) {

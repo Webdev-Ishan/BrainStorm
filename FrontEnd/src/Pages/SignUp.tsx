@@ -28,6 +28,7 @@ export const SignUp = () => {
   type BackendResponse = {
     success: boolean;
     message: string;
+    token:string
   };
 
   const validateUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -77,6 +78,7 @@ export const SignUp = () => {
       );
 
       if (response.data && response.data.success) {
+         localStorage.setItem("token", response.data.token);
         toast.success("Validation successfull");
         dispatch(Login());
         navigate("/Profile");

@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 
 const secret: string = process.env.JWT_SECRET!;
+
 interface JwtPayload {
   id: string;
 }
@@ -11,27 +12,30 @@ export const authUser = async (
   res: Response,
   next: NextFunction
 ) => {
-  if (!req.cookies.token) {
-    return res.status(403).json({
-      success: false,
-      message: "Token not found",
-    });
-  }
-  try {
-    let decoded = jwt.verify(req.cookies.token, secret) as JwtPayload;
+  const authHeader = req.headers.authorization;
 
-    if (decoded.id) {
-      req.user = { id: decoded.id };
+  if (!authHeader?.startsWith("Bearer ")) {
+    return res.status(401).json({ success: false, message: "Unauthorized" });
+  }
+
+  const token = authHeader.split(" ")[1];
+
+  try {
+    const decoded = jwt.verify(token, secret) as JwtPayload;
+
+    if (!decoded?.id) {
+      return res.status(401).json({ success: false, message: "Invalid token" });
     }
+
+    // ✅ Attach user ID to request object
+    req.user = { id: decoded.id };
 
     next();
   } catch (error) {
-    if (error instanceof Error) {
-      return res.status(500).json({
-        success: false,
-        message: "Something went wrong",
-        error: error,
-      });
-    }
+    return res.status(401).json({
+      success: false,
+      message: "Invalid or expired token",
+    });
   }
 };
+

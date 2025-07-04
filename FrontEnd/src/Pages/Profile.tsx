@@ -53,13 +53,16 @@ const Profile = () => {
   const [query, setquery] = useState("");
 
   const url = import.meta.env.VITE_API_URL;
+const token = localStorage.getItem("token");
 
   const fetchdata = async () => {
     try {
       const response = await axios.get<BackendResponse>(
         `${url}/api/auth/profile`,
         {
-          withCredentials: true,
+          headers: {
+    Authorization: `Bearer ${token}`, // ✅ token as header
+  },
         }
       );
 
