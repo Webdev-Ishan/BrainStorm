@@ -85,10 +85,10 @@ return (
   <div
     className="flex items-center justify-center h-60 w-full rounded-lg bg-gray-50 border border-gray-200 shadow-inner overflow-hidden"
     style={{
-      minHeight: "240px",
-      minWidth: "240px",
-      maxHeight: "240px",
-      maxWidth: "240px",
+      minHeight: "220px",
+      minWidth: "220px",
+      maxHeight: "220px",
+      maxWidth: "220px",
     }}
   >
     <div className="flex items-center justify-center w-full h-full">
