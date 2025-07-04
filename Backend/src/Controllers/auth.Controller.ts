@@ -131,7 +131,7 @@ export const SigninController = async (req: Request, res: Response) => {
       maxAge: 1 * 24 * 60 * 60 * 1000, // 1 day
       secure: true,
       sameSite: "none",
-      domain:"https://api.brainstormideas.xyz"
+      domain:"api.brainstormideas.xyz"
     });
 
     return res.status(200).json({
