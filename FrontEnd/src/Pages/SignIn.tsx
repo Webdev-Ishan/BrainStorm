@@ -50,17 +50,20 @@ export const SignIn = () => {
 
   const submithandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formdata = new FormData();
 
-    formdata.append("email", email);
-    formdata.append("password", password);
+    const payload = {
+      email,
+      password,
+    };
 
     try {
       const response = await axios.post<BackendResponse>(
         `${url}/api/auth/signin`,
-        formdata,
+        payload,
         {
-          
+          headers: {
+            "Content-Type": "application/json",
+          },
           withCredentials: true,
         }
       );
