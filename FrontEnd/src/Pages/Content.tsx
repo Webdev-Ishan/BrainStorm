@@ -134,7 +134,7 @@ export const Content = () => {
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                 Type
               </label>
-              <select value={type} onChange={()=>validateTypes} className="appearance-none block w-full bg-white text-gray-900 font-medium border border-gray-400 rounded-lg py-3 px-3 leading-tight focus:outline-none">
+              <select value={type} onChange={validateTypes} className="appearance-none block w-full bg-white text-gray-900 font-medium border border-gray-400 rounded-lg py-3 px-3 leading-tight focus:outline-none">
                 <option value="tweet">Tweet</option>
                 <option value="Youtube">Youtube</option>
                 <option value="linkedin">Linkedin</option>
