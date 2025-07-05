@@ -41,8 +41,8 @@ const Edit = () => {
       }
     } catch (error) {
       if (error instanceof Error) {
-        toast.error(error);
-        console.log(error.message);
+        toast.error(error.message);
+        console.log(error);
       }
     }
   };
