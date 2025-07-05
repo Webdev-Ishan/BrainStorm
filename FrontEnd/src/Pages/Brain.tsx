@@ -52,7 +52,9 @@ const Brain = () => {
   return (
     <div className="w-full h-full bg-black pt-24 pb-8 flex justify-center items-center  ">
       {type ? (
+        <div className="flex flex-col justify-between items-center space-y-3">
         <Card type={type} link={link} />
+        </div>
       ) : (
         <div className="flex flex-col justify-between items-center space-y-3">
           <Skeleton className="h-[125px] w-[250px] rounded-xl" />
