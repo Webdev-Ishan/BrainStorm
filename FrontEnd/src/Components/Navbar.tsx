@@ -35,6 +35,7 @@ export const Navbar = () => {
         );
 
         if (response.data && response.data.success) {
+          localStorage.removeItem("token");
           dispatch(Logout());
           setbuttonProp("Get Started");
           toast.success("Logout Successfull");

@@ -1,5 +1,7 @@
 import { Button } from "@/Components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { isJwtExpired } from 'jwt-check-expiration';
+
 import {
   Carousel,
   CarouselContent,
@@ -19,6 +21,8 @@ type ContentItem = {
   name: string;
   content: string;
 };
+
+
 
 type BackendResponse = {
   success: boolean;
@@ -65,7 +69,7 @@ export const HomePage = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
 
-    if (token) {
+    if (token && !isJwtExpired(token)) {
       dispatch(Login());
     } else {
       dispatch(Logout());

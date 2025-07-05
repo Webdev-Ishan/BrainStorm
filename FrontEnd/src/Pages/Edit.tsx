@@ -52,7 +52,7 @@ const Edit = () => {
   return (
     <div className="w-full h-full bg-black pt-24 pb-8  ">
       {type ? (
-        <Card type={type} link={link} />
+        <Card type={type} link={link}  />
       ) : (
         <div className="flex flex-col justify-between items-center space-y-3">
           <Skeleton className="h-[125px] w-[250px] rounded-xl" />

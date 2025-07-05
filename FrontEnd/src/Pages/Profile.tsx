@@ -227,6 +227,7 @@ const Profile = () => {
                       link={item.link}
                       title={item.title}
                       type={item.type}
+                      id = {item._id}
                     />
                   </div>
                 </figure>

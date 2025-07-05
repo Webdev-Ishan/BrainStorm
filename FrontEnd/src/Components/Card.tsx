@@ -2,6 +2,7 @@ interface CardProps {
   type?: string;
   title?: string;
   link: string;
+  id?:string
 }
 
 function extractYouTubeId(url: string): string | null {
