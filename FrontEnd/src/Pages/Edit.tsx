@@ -24,11 +24,15 @@ const Edit = () => {
   const id = useParams().id;
   const url = import.meta.env.VITE_API_URL;
 
+  const token = localStorage.getItem("token");
   const fetchBrain = async () => {
     try {
       const response = await axios.get<BackendResponse>(
         `${url}/api/user/content/${id}`,
         {
+           headers: {
+            Authorization: `Bearer ${token}`, // ✅ token as header
+          },
           withCredentials: true,
         }
       );
