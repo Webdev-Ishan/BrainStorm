@@ -15,7 +15,7 @@ export const Content = () => {
   type BackendResponse = {
     success: boolean;
     message: string;
-    token:string;
+    token: string;
   };
 
   const validateTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,7 +26,7 @@ export const Content = () => {
     setlink(e.target.value);
   };
 
-  const validateTypes = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const validateTypes = (e: React.ChangeEvent<HTMLSelectElement>) => {
     settype(e.target.value);
   };
 
@@ -41,7 +41,6 @@ export const Content = () => {
   const submithandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-
     try {
       const response = await axios.post<BackendResponse>(
         `${url}/api/user/content`,
@@ -52,7 +51,7 @@ export const Content = () => {
           tags: tags, // ✅ tags is a string[]
         },
         {
-           headers: {
+          headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
@@ -135,13 +134,13 @@ export const Content = () => {
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                 Type
               </label>
-              <input
-                className="appearance-none block w-full bg-white text-gray-900 font-medium border border-gray-400 rounded-lg py-3 px-3 leading-tight focus:outline-none"
-                type="text"
-                value={type}
-                onChange={validateTypes}
-                required
-              />
+              <select value={type} onChange={()=>validateTypes} className="appearance-none block w-full bg-white text-gray-900 font-medium border border-gray-400 rounded-lg py-3 px-3 leading-tight focus:outline-none">
+                <option value="tweet">Tweet</option>
+                <option value="Youtube">Youtube</option>
+                <option value="linkedin">Linkedin</option>
+                <option value="Instagram">Instagram</option>
+                <option value="facebook">Facebook</option>
+              </select>
             </div>
 
             {/* TAG INPUTS */}
