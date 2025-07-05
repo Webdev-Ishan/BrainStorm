@@ -48,7 +48,7 @@ const Edit = () => {
   };
   useEffect(() => {
     fetchBrain();
-  }, [neuron]);
+  }, [id]);
   return (
     <div className="w-full h-full bg-black pt-24 pb-8  ">
       {type ? (
