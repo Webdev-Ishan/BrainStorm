@@ -21,13 +21,13 @@ const Edit = () => {
   const [type, settypes] = useState("");
   const [link, setlink] = useState("");
 
-  const neuron = useParams().id;
+  const id = useParams().id;
   const url = import.meta.env.VITE_API_URL;
 
   const fetchBrain = async () => {
     try {
       const response = await axios.get<BackendResponse>(
-        `${url}/api/user/content/${neuron}`,
+        `${url}/api/user/content/${id}`,
         {
           withCredentials: true,
         }
@@ -67,4 +67,3 @@ const Edit = () => {
 };
 
 export default Edit;
-

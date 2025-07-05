@@ -64,11 +64,11 @@ export const HomePage = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log(token);
+
     if (token) {
       dispatch(Login());
-    }else{
-    dispatch(Logout());
+    } else {
+      dispatch(Logout());
     }
     fetchReviews();
   }, []);
