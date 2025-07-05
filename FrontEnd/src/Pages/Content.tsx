@@ -61,7 +61,6 @@ export const Content = () => {
       );
 
       if (response.data && response.data.success) {
-        localStorage.setItem("token", response.data.token);
         toast.success("Content Added");
         navigate("/Profile");
         setTitle("");
