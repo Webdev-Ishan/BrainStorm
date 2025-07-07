@@ -71,8 +71,8 @@ const Edit = () => {
       }
     } catch (error) {
       if (error instanceof Error) {
-        toast.error("Somethign went wrong.");
-        console.log(error.message);
+        toast.error("Something went wrong.");
+        console.log(error);
       }
     }
   };
