@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Card } from "../Components/Card";
 import { Skeleton } from "@/Components/ui/skeleton";
 
@@ -23,7 +23,7 @@ const Edit = () => {
 
   const id = useParams().id;
   const url = import.meta.env.VITE_API_URL;
-
+  const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const fetchBrain = async () => {
     try {
@@ -63,8 +63,8 @@ const Edit = () => {
         }
       );
       if (response.data && response.data.success) {
-        settypes(response.data.content.type);
-        setlink(response.data.content.link);
+        toast.success("Deleted Successfully.");
+        navigate("/Profile");
       } else {
         toast.error(response.data.message || "Something went wrong");
         console.log(response.data.message);
