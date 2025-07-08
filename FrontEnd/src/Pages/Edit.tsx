@@ -85,7 +85,7 @@ const Edit = () => {
       {type ? (
         <div className="w-auto h-auto flex justify-center flex-col items-center">
           <Card type={type} link={link} />
-          <div className="w-full h-auto flex flex-col gap-2 justify-center items-center">
+          <div className="w-full h-auto flex  gap-2 justify-center items-center">
             <button
               type="button"
               onClick={() => navigate(`/EditContent/${id}`)}
