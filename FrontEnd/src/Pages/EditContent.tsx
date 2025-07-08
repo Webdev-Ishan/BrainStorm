@@ -22,7 +22,7 @@ function EditContent() {
 
   const navigate = useNavigate();
 
-  const id = useParams();
+  const id = useParams().id;
   const url = import.meta.env.VITE_API_URL;
   const token = localStorage.getItem("token");
 
