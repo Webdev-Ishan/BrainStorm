@@ -15,6 +15,12 @@ const contentSchema = z.object({
   tags: z.array(z.string()),
 });
 
+const updationSchema = z.object({
+  link: z.string(),
+  type: z.string(),
+  title: z.string(),
+});
+
 const searchSchema = z.object({
   query: z.string(),
 });
@@ -303,7 +309,7 @@ export const UpdateController = async (req: Request, res: Response) => {
     });
   }
 
-  const parsedbody = contentSchema.safeParse(req.body);
+  const parsedbody = updationSchema.safeParse(req.body);
 
   if (!parsedbody.success) {
     return res.status(411).json({
@@ -312,7 +318,7 @@ export const UpdateController = async (req: Request, res: Response) => {
       errors: parsedbody.error.flatten(),
     });
   }
-  const { link, type, title, tags } = parsedbody.data;
+  const { link, type, title } = parsedbody.data;
 
   try {
     let exist = await userModel.findById(userid);
@@ -350,28 +356,6 @@ export const UpdateController = async (req: Request, res: Response) => {
       content.title = title;
     }
 
-    let uniqueTags = [...new Set(tags)];
-
-    let newtags = uniqueTags.map((tag) => ({
-      updateOne: {
-        filter: { title: tag },
-        update: { $setOnInsert: { title: tag } },
-        upsert: true,
-      },
-    }));
-
-    await tagModel.bulkWrite(newtags);
-
-    const tagDocs = await tagModel.find({
-      title: { $in: uniqueTags },
-    });
-
-    // Extract ObjectIds
-    const tagIDs = tagDocs.map((tag) => tag._id);
-
-    if (content.tagID != tagIDs) {
-      content.tagID = tagIDs;
-    }
     await content.save();
 
     return res.status(200).json({
