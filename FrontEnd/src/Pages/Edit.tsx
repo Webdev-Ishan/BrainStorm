@@ -20,7 +20,7 @@ type BackendResponse = {
 const Edit = () => {
   const [type, settypes] = useState("");
   const [link, setlink] = useState("");
-
+  const [title, settitle] = useState("");
   const id = useParams().id;
   const url = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
@@ -39,6 +39,7 @@ const Edit = () => {
       if (response.data && response.data.success) {
         settypes(response.data.content.type);
         setlink(response.data.content.link);
+        settitle(response.data.content.title);
       } else {
         toast.error(response.data.message || "Something went wrong");
         console.log(response.data.message);
@@ -84,7 +85,7 @@ const Edit = () => {
     <div className="w-full h-full bg-black pt-24 pb-8  ">
       {type ? (
         <div className="w-auto h-auto flex justify-center flex-col items-center">
-          <Card type={type} link={link} />
+          <Card type={type} link={link} title={title} />
           <div className="w-full h-auto flex  gap-2 justify-center items-center">
             <button
               type="button"

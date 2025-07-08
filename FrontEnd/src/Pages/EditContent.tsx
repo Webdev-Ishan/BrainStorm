@@ -50,6 +50,7 @@ function EditContent() {
         }
       );
       if (response.data && response.data.success) {
+        setTitle(response.data.content.title);
         settype(response.data.content.type);
         setlink(response.data.content.link);
       } else {
@@ -69,7 +70,7 @@ function EditContent() {
 
     try {
       const response = await axios.put<BackendResponse>(
-        `${url}/user/updateInfo/${id}`,
+        `${url}/api/user/updateInfo/${id}`,
         {
           Title,
           type,
