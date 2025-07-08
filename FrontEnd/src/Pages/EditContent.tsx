@@ -72,7 +72,7 @@ function EditContent() {
       const response = await axios.put<BackendResponse>(
         `${url}/api/user/updateInfo/${id}`,
         {
-          Title,
+          title:Title,
           type,
           link,
         },
