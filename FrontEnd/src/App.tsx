@@ -13,6 +13,7 @@ import { Content } from "./Pages/Content";
 import Brain from "./Pages/Brain";
 import { Review } from "./Pages/Review";
 import Edit from "./Pages/Edit";
+import EditContent from "./Pages/EditContent";
 const App = () => {
   return (
   <>
@@ -32,6 +33,7 @@ const App = () => {
           <Route path="/braincontent/:id" element={<Brain/>} />
           <Route path="/content/:id" element={<Edit/>} />
           <Route path="/review" element={<Review/>} />
+          <Route path="/EditContent/:id" element={<EditContent/>} />
         </Routes>
         <Footer/>
       </div>
