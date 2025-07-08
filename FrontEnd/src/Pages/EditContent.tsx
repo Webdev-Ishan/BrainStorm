@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -103,7 +104,7 @@ function EditContent() {
   }, [id]);
 
   return (
-    <div>
+    <div className="mt-24 mb-16">
       <div className="flex justify-center my-2 mx-4 md:mx-0 mb-24">
         <form
           onSubmit={submithandler}
