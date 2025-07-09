@@ -28,7 +28,7 @@ export const SignIn = () => {
   type BackendResponse = {
     success: boolean;
     message: string;
-    token:string;
+    token: string;
   };
 
   const validateEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,7 +70,7 @@ export const SignIn = () => {
       );
 
       if (response.data && response.data.success) {
-         localStorage.setItem("token", response.data.token);
+        localStorage.setItem("token", response.data.token);
         toast.success("Login successfull");
         dispatch(Login());
         navigate("/Profile");

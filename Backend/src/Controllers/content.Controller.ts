@@ -338,7 +338,7 @@ export const UpdateController = async (req: Request, res: Response) => {
     }
 
     if (content.userID?.toString() != userid) {
-      return res.status(403).json({
+      return res.status(409).json({
         success: false,
         message: "You can not update this content",
       });

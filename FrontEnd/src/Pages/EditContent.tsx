@@ -88,9 +88,6 @@ function EditContent() {
       if (response.data && response.data.success) {
         toast.success("Updation is successfull.");
         navigate("/Profile");
-      } else {
-        toast.error(response.data.message || "Something went wrong");
-        console.log(response.data.message);
       }
     } catch (error) {
       if (error instanceof Error) {

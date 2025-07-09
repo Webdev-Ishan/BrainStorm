@@ -13,8 +13,8 @@ type ContentItem = {
   link: string;
   type: string;
   title: string;
-  _id:string;
-  sharable:string;
+  _id: string;
+  sharable: string;
 };
 
 type BackendResponse = {
@@ -87,14 +87,12 @@ const Profile = () => {
     }
   };
 
-  
-
   const onSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const response = await axios.post<BackendResponse2>(
         `${url}/api/user/search`,
-        {query},
+        { query },
         {
           headers: {
             Authorization: `Bearer ${token}`, // ✅ token as header
@@ -227,7 +225,7 @@ const Profile = () => {
                       link={item.link}
                       title={item.title}
                       type={item.type}
-                      id = {item._id}
+                      id={item._id}
                     />
                   </div>
                 </figure>
@@ -247,10 +245,7 @@ const Profile = () => {
                       </button>
                     </a>
 
-                     <Link
-                      to={`/content/${item._id}`}
-                      className="inline-block"
-                    >
+                    <Link to={`/content/${item._id}`} className="inline-block">
                       <button className="px-4 py-2 ml-2 text-sm font-medium rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 text-white hover:from-indigo-600 hover:to-blue-500 transition-colors duration-300 shadow-md hover:shadow-lg">
                         Edit
                       </button>
