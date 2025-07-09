@@ -69,8 +69,21 @@ Creating a Note
 
 Searching/Filtering
 
-    Type in search field or select a tag → Note list updates in real-time
+    Type in search field → Note list updates in real-time
 
 Editing / Deleting
 
-    Use the action icons (✏️ edit, 🗑️ delete) on your saved notes
+    Use the action icons  edit,  delete button on your saved notes
+
+
+📄 License
+
+Licensed under MIT License — feel free to reuse and build upon this project!
+
+👤 About the Author
+
+Ishan Saini — Full-stack developer passionate about productivity tools and clean software architecture.
+Connect on LinkedIn — [www.linkedin.com/in/ishan-saini-49b6842a6].
+
+
+
