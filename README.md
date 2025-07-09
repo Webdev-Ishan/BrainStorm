@@ -61,26 +61,26 @@ PORT=3000
 npm run dev
 ```
 
-Creating a Note
+ ## Creating a Note
 
     Fill out the form (title, content, tags)
 
     Submit → The note saves to the database and instantly appears in your dashboard
 
-Searching/Filtering
+ ## Searching/Filtering
 
     Type in search field → Note list updates in real-time
 
-Editing / Deleting
+## Editing / Deleting
 
     Use the action icons  edit,  delete button on your saved notes
 
 
-📄 License
+## 📄 License
 
 Licensed under MIT License — feel free to reuse and build upon this project!
 
-👤 About the Author
+## 👤 About the Author
 
 Ishan Saini — Full-stack developer passionate about productivity tools and clean software architecture.
 Connect on LinkedIn — [www.linkedin.com/in/ishan-saini-49b6842a6].
