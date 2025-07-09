@@ -4,7 +4,7 @@
 
 ## 🚀 Live Demo & Screenshots
 
-[Brainstorm](https://www.brainstormideas.xyz/Profile)
+[Brainstorm](https://www.brainstormideas.xyz)
 
 ## 🎯 Key Features
 
