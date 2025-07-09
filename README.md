@@ -1,6 +1,6 @@
 # 🧠 BrainStorm — Your Second Brain App
 
-# **BrainStorm** is a personal knowledge management app designed to help you capture, organize, and revisit your ideas — turning your digital brain into a reliable partner for learning and creativity.
+ **BrainStorm** is a personal knowledge management app designed to help you capture, organize, and revisit your ideas — turning your digital brain into a reliable partner for learning and creativity.
 
 ## 🚀 Live Demo & Screenshots
 
@@ -79,6 +79,8 @@ npm run dev
 ## 📄 License
 
 Licensed under MIT License — feel free to reuse and build upon this project!
+
+
 
 ## 👤 About the Author
 
