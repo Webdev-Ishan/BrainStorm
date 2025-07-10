@@ -13,18 +13,7 @@ function extractYouTubeId(url: string): string | null {
 export const Card = ({ type, link }: CardProps) => {
   const renderEmbed = () => {
     switch (type?.toLowerCase()) {
-      case "tweet":
-      case "twitter":
-        return (
-          <iframe
-            src={`https://twitframe.com/show?url=${encodeURIComponent(link)}`}
-            width="240"
-            height="240"
-            style={{ border: "none", overflow: "hidden" }}
-            allowFullScreen
-          ></iframe>
-        );
-
+      
       case "facebook":
         return (
           <iframe
